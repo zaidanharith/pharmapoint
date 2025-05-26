@@ -1,2 +1,35 @@
 @import "tailwindcss";
 @source "../views";
+
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+
+@theme {
+    --color-red: #b62b03;
+    --color-yellow: #fcdc1c;
+    --color-blue-light: #1ca2dd;
+    --color-green: #1f8433;
+    --color-black: #030303;
+
+    --color-blue-navy: #27548a;
+    --color-blue-dark: #183b4e;
+    --color-orange: #dda853;
+    --color-peach: #f3f3e0;
+
+    --font-jakarta: "Plus Jakarta Sans", sans-serif;
+}
+
+.nav-toggle {
+    @apply w-[30px] h-[2px] block bg-orange my-1 rounded-full;
+}
+
+.nav-toggle-active > span:nth-child(1) {
+    @apply rotate-45;
+}
+
+.nav-toggle-active > span:nth-child(2) {
+    @apply scale-0;
+}
+
+.nav-toggle-active > span:nth-child(3) {
+    @apply -rotate-45;
+}
