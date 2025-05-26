@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <title>{{ $title }} - PharmaPoint+</title>
-     @vite("resources/css/app.css")
-     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-</head>
-<body>
-     <h1>Selamat Datang di Katalog</h1>
+<x-layout>
+     <x-slot:title>{{ $title }}</x-slot:title>
+     <h1 class="mt-20">Selamat Datang di Katalog</h1>
      <a href="/">KEMBALI</a>
-</body>
-</html>
+     <p>Sekarang {{ date("d M y") }}</p>
+     <br>
+     @foreach ($owners as $owner)  
+     <p>Nama : {{ $owner['name'] }}</p>
+     <p>Email : {{ $owner['email'] }}</p>
+     <p>Password : {{ $owner['password'] }}</p>
+     <br>
+     @endforeach
+</x-layout>

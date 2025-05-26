@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('medicines', function (Blueprint $table) {
+        Schema::create('medicine__descriptions', function (Blueprint $table) {
             $table->id()->primary()->autoIncrement();
-            $table->string('name');
-            $table->unsignedBigInteger('price');
-            $table->integer('stock');
-            $table->foreignId('id_category')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('id_medicine')->constrained('medicines')->onDelete('cascade');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('medicines');
+        Schema::dropIfExists('medicine__descriptions');
     }
 };

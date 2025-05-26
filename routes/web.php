@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     // return view('welcome'); 
@@ -12,7 +13,7 @@ Route::get('/', function () {
 
 Route::get('/katalog', function () {
     return view('catalogue',[
-        'title'=>'Katalog'
+        'title'=>'Katalog', 'owners' => User::all()
     ]); 
 });
 
