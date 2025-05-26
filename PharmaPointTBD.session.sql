@@ -1,1 +1,1 @@
-SELECT * FROM "Buku"
+SELECT * FROM "users"
