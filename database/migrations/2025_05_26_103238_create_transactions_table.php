@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id()->primary()->autoIncrement();
             $table->timestamp('transaction_date');
             $table->unsignedBigInteger('total_payment');
-            $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class MedicinesFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name'=>fake()->word(10),
+            'price'=>fake()->numberBetween(10000,100000),
+            'stock'=>fake()->numberBetween(1,100),
+            'category_id'=>fake()->numberBetween(1,7)
         ];
     }
 }

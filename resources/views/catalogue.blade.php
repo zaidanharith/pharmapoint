@@ -27,7 +27,7 @@
                 <div
                   class="flex cursor-pointer hover:font-medium hover:text-blue-navy"
                 >
-                  <span class="material-symbols-outlined"> filter_alt </span>
+                  <span class="material-symbols-outlined mr-1"> filter_alt </span>
                   <p>Filter</p>
                 </div>
               </div>
@@ -42,7 +42,7 @@
                     <div class="flex flex-col h-4/9 justify-center px-5">
                       <div class="flex justify-between items-center">
                         <h2 class="font-bold text-md">{{Str::limit($medicine['name'],10)}}</h2>
-                        <p class="font-medium text-sm">Kesehatan Mata</p>
+                        <p class="font-medium text-sm">{{$medicine->category->name}}</p>
                       </div>
                       <h3 class="font-extrabold text-xl text-blue-dark mt-1 mb-3">Rp. {{$medicine['price']}}</h3>
                       <h4 class="flex items-center">

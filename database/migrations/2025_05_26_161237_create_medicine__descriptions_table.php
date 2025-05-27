@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('medicine__descriptions', function (Blueprint $table) {
             $table->id()->primary()->autoIncrement();
-            $table->foreignId('id_medicine')->constrained('medicines')->onDelete('cascade');
+            $table->foreignId('medicine_id')->constrained('medicines')->onDelete('cascade');
             $table->text('description');
             $table->timestamps();
         });

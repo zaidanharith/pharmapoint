@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('medicines', function (Blueprint $table) {
             $table->id()->primary()->autoIncrement();
             $table->string('name');
+            $table->string('slug')->nullable();
             $table->unsignedBigInteger('price');
             $table->integer('stock');
-            $table->foreignId('id_category')->constrained('categories')->onDelete('cascade');
+            $table->string('image')->nullable();
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
