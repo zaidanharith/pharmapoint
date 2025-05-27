@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Models\Medicines;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
@@ -13,7 +13,7 @@ Route::get('/', function () {
 
 Route::get('/katalog', function () {
     return view('catalogue',[
-        'title'=>'Katalog', 'owners' => User::all()
+        'title'=>'Katalog', 'medicines' => Medicines::all()
     ]); 
 });
 

@@ -21,7 +21,12 @@
             class="flex flex-col md:flex-row md:justify-between items-center"
           >
             <a
-              href="#about"
+              href="/# "
+              class="px-4 py-5 hover:text-orange md:p-0 md:ml-7"
+              >Beranda</a
+            >
+            <a
+              href="/#about"
               class="px-4 py-5 hover:text-orange md:p-0 md:ml-7"
               >Tentang Kami</a
             >

@@ -25,7 +25,7 @@
             voluptatum minus saepe!
           </p>
           <a
-            href="#"
+            href="/katalog"
             class="text-base py-3 px-7 bg-orange font-semibold rounded-full hover:bg-orange/80 active:opacity-80 transition duration-200"
             >Lihat Katalog</a
           >
