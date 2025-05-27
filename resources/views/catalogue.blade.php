@@ -1,20 +1,14 @@
-{{$img = collect([1,2,3,4,5])}}
-
 <x-layout>
      <x-slot:title>{{ $title }}</x-slot:title>
 
      {{-- KATALOG START --}}
      <section id="catalogue" class="py-30 text-black">
           <div class="container mx-auto px-4">
-            <h1
-              class="font-extrabold text-4xl text-blue-dark mb-20 text-center md:text-left"
-            >
-              Katalog Obat
+            <h1 class="font-extrabold text-4xl text-blue-dark mb-10 text-center md:text-left">
+              Katalog
             </h1>
-            <div
-              class="flex flex-col rounded-md shadow-md overflow-hidden px-4 md:px-10 py-7 md:py-10"
-            >
-              <div class="w-full flex justify-between mb-10">
+            <div class="flex flex-col rounded-md shadow-md overflow-hidden px-4 md:px-10 py-7 md:py-10">
+              <div class="w-full flex justify-between">
                 <form action="#" class="flex">
                   <label for="search" class="flex items-center"
                     ><span class="material-symbols-outlined mr-1">
@@ -37,34 +31,31 @@
                   <p>Filter</p>
                 </div>
               </div>
-              <div class="w-full flex flex-wrap gap-10 lg:gap-x-0 justify-center lg:justify-between">
+              <div class="w-full grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-10">
                @foreach ($medicines as $medicine)
-               <div class="flex flex-col overflow-hidden rounded-lg shadow-md w-full lg:w-1/2 lg:max-w-md xl:max-w-lg 2xl:max-w-md hover:bg-peach hover:border-1 group border-orange hover:shadow-lg cursor-pointer transition-all duration-200">
+               <a href="/katalog/{{$medicine['id']}}" class="flex flex-col max-h-75 overflow-hidden rounded-lg shadow-md w-full sm:aspect-square hover:bg-peach hover:border-1 group border-orange hover:shadow-lg cursor-pointer transition-all duration-200">
                     <img
                         src="img/catalogue/{{$img->random()}}.jpg"
-                        alt="Gambar {{$medicine['nama']}}"
-                        class="w-full h-1/2 object-cover bg-center transition-all duration-500 ease-in-out transform origin-bottom group-hover:scale-110"
+                        alt="Gambar {{$medicine['name']}}"
+                        class="w-full h-5/9 object-cover bg-center transition-all duration-300 ease-in-out transform origin-bottom group-hover:scale-110"
                     />
-                    <div class="flex flex-col justify-center px-5 pt-7 md:px-7">
-                        <h2 class="font-bold text-lg">{{$medicine['name']}}</h2>
-                        <h3 class="font-extrabold text-xl text-blue-dark mt-2">Rp. {{$medicine['price']}}</h3>
-                        <p class="mt-3 mb-5 font-light text-base">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. In
-                            aut eligendi quibusdam temporibus mollitia, itaque nisi
-                            repellendus quae consectetur optio?
-                        </p>
-                        <div class="flex justify-between">
-                            <h4 class="flex items-center font-bold">
-                                <span class="material-symbols-outlined mr-1">
-                                    inventory_2
-                                </span>
-                                <p>{{$medicine['stock']}}</p>
-                            </h4>
-                            <p class="font-medium text-sm">Kesehatan Mata</p>
-                        </div>
+                    <div class="flex flex-col h-4/9 justify-center px-5">
+                      <div class="flex justify-between items-center">
+                        <h2 class="font-bold text-md">{{Str::limit($medicine['name'],10)}}</h2>
+                        <p class="font-medium text-sm">Kesehatan Mata</p>
+                      </div>
+                      <h3 class="font-extrabold text-xl text-blue-dark mt-1 mb-3">Rp. {{$medicine['price']}}</h3>
+                      <h4 class="flex items-center">
+                          <p class="font-bold text-sm text-green">Stok: <span>{{$medicine['stock']}}</span></p>
+                      </h4>
                     </div>
-                </div>                
+                </a>                
                @endforeach
+              </div>
+              <div class="flex justify-center items-center gap-3 py-3">
+                @for ($i=1;$i<=10;$i++)  
+                <a href="#" class="px-3 py-1.5 font-bold text-lg border-1 border-orange bg-orange-50 rounded-md hover:shadow-sm hover:bg-orange-100">{{$i}}</a>
+                @endfor
               </div>
             </div>
           </div>

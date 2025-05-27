@@ -2,6 +2,7 @@
 
 use App\Models\Medicines;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
@@ -13,7 +14,13 @@ Route::get('/', function () {
 
 Route::get('/katalog', function () {
     return view('catalogue',[
-        'title'=>'Katalog', 'medicines' => Medicines::all()
+        'title'=>'Katalog', 'medicines' => Medicines::all(), 'img'=>collect([1,2,3,4,5])
+    ]); 
+});
+
+Route::get('/katalog/{id}', function ($id) {
+    return view('catalogue-detail',[
+        'medicine' => Medicines::find($id)
     ]); 
 });
 

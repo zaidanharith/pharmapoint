@@ -3,4 +3,5 @@
 </x-header>
 <x-navbar></x-navbar>
 {{ $slot }}
+<x-page-footer></x-page-footer>
 <x-footer></x-footer>
