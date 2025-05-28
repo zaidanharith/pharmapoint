@@ -9,7 +9,7 @@
             </h1>
             <div class="flex flex-col rounded-md shadow-md overflow-hidden px-4 md:px-10 py-7 md:py-10">
               <div class="w-full flex justify-between">
-                <form action="#" class="flex">
+                <form class="flex">
                   <label for="search" class="flex items-center"
                     ><span class="material-symbols-outlined mr-1">
                       search
@@ -20,19 +20,23 @@
                     name="search"
                     id="search"
                     placeholder="Cari..."
-                    autofocus
+                    autofocus autocomplete="off"
                     class="outline-none hover:border-orange focus:border-b-2 focus:border-orange"
                   />
                 </form>
-                <div
-                  class="flex cursor-pointer hover:font-medium hover:text-blue-navy"
-                >
-                  <span class="material-symbols-outlined mr-1"> filter_alt </span>
-                  <p>Filter</p>
-                </div>
+                <div class="flex">
+                  <div class="flex cursor-pointer hover:font-medium hover:text-blue-navy mr-4">
+                    <span class="material-symbols-outlined"> filter_alt </span>
+                    <p>Kategori</p>
+                  </div>
+                  <div class="flex cursor-pointer hover:font-medium hover:text-blue-navy">
+                    <span class="material-symbols-outlined"> sort </span>
+                    <p>Urutkan</p>
+                  </div>
+              </div>
               </div>
               <div class="w-full grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-10">
-               @foreach ($medicines as $medicine)
+               @forelse ($medicines as $medicine)
                <a href="/katalog/{{$medicine['slug']}}" class="flex flex-col max-h-75 overflow-hidden rounded-lg shadow-md w-full sm:aspect-square hover:bg-peach hover:border-1 group border-orange hover:shadow-lg cursor-pointer transition-all duration-200">
                     <img
                         src="img/catalogue/{{$medicine->image}}.jpg"
@@ -49,14 +53,15 @@
                           <p class="font-bold text-sm text-green">Stok: <span>{{$medicine->stock}}</span></p>
                       </h4>
                     </div>
-                </a>                
-               @endforeach
+                </a>  
+                @empty
+                <div class="flex flex-col">
+                  <p class="font-bold text-lg mb-3">Produk tidak ditemukan!</p> 
+                  <a href="/katalog" class="flex items-center hover:font-bold group transition-all duration-200"><span class="material-symbols-outlined mr-1 group-hover:-translate-x-3 transition-all duration-200 ease-in-out">arrow_back</span>Lihat semua katalog</a>
+              </div>            
+               @endforelse
               </div>
-              <div class="flex justify-center items-center gap-3 py-3">
-                @for ($i=1;$i<=10;$i++)  
-                <a href="#" class="px-3 py-1.5 font-bold text-lg border-1 border-orange bg-orange-50 rounded-md hover:shadow-sm hover:bg-orange-100">{{$i}}</a>
-                @endfor
-              </div>
+              {{ $medicines->links() }}
             </div>
           </div>
         </section>

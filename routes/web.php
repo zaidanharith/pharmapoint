@@ -4,6 +4,7 @@ use App\Models\Medicines;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterController;
 
 Route::get('/', function () {
     // return view('welcome'); 
@@ -14,7 +15,7 @@ Route::get('/', function () {
 
 Route::get('/katalog', function () {
     return view('catalogue',[
-        'title'=>'Katalog', 'medicines' => Medicines::all()
+        'title'=>'Katalog', 'medicines' => Medicines::filter()->orderBy('name')->paginate(15)
     ]); 
 });
 
@@ -23,7 +24,6 @@ Route::get('/katalog/{medicine:slug}', function (Medicines $medicine) {
         'title' => $medicine->name, 'medicine'=>$medicine
     ]); 
 });
-
 
 
 Route::get('/dashboard', function () {

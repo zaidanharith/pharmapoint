@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call([CategorySeeder::class,UserSeeder::class]);
 
         TransactionDetail::factory(10)->recycle([
-            Medicines::factory(25)->recycle(Category::all())->create(),
+            Medicines::factory(50)->recycle(Category::all())->create(),
             Transaction::factory(15)->recycle([
                 User::all(),
                 User::factory(8)->create()

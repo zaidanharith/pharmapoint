@@ -1,24 +1,24 @@
+<x-auth-session-status class="mb-4" :status="session('status')" />
 
 <x-header>
     <x-slot:title>{{"Tes"}}</x-slot:title>
 </x-header>
 
-<section id="login" class="select-none min-h-screen bg-blue-dark p-10 xl:flex xl:flex-col xl:justify-center">
-    <div class="container mx-auto max-w-lg xl:max-w-7xl text-black border-1 bg-white rounded-3xl  overflow-hidden shadow-lg flex">
+    <section id="login" class="select-none min-h-screen bg-blue-dark p-10 xl:flex xl:flex-col xl:justify-center">
+      <div class="container mx-auto max-w-lg xl:max-w-7xl text-black border-1 bg-white rounded-3xl  overflow-hidden shadow-lg flex">
         <div class="hidden xl:w-3/7 xl:flex h-full">
-            <img src="img/pharmacy.jpg" alt="Medicine" class="h-full object-cover">
+          <img src="img/pharmacy.jpg" alt="Medicine" class="h-full object-cover">
         </div>
         <div class="w-full px-6 md:px-8 xl:px-12 py-15 xl:w-4/7 flex flex-col justify-center">
-            <a href="/" class="block w-full mb-10 text-center">
-                <h1 class="font-extrabold text-3xl text-black">PharmaPoint+</h1>
-                <p class="font-bold text-black">By ZACreative</p>
-            </a>
-            <h1 class="font-extrabold text-xl text-center">
-                Silakan masukkan akun Anda!
-            </h1>
-            <x-auth-session-status class="mb-4" :status="session('status')" />
-            <form method="POST" action="{{ route('login') }}" class="mt-10">
-            @csrf 
+          <a href="/" class="block w-full mb-10 text-center">
+            <h1 class="font-extrabold text-3xl text-black">PharmaPoint+</h1>
+            <p class="font-bold text-black">By ZACreative</p>
+          </a>
+          <h1 class="font-extrabold text-xl text-center">
+            Silakan masukkan akun Anda!
+          </h1>
+          <form method="POST" action="{{ route('login') }}" class="mt-10">
+          @csrf 
             <div class="flex flex-col">
               <label
                 for="email"
@@ -33,7 +33,7 @@
                 required
                 class="py-1.5 outline-none border-b-1 hover:border-orange focus:border-b-2 focus:border-orange"
               />
-              <p class="font-bold text-sm mt-2 text-red">{{$errors->first('email')}}</p>
+              <p class="font-bold text-sm mt-2 text-red">{{$errors->get('email')}}</p>
             </div>
             <div class="flex flex-col mt-5">
               <label
@@ -50,7 +50,7 @@
                 class="py-1.5 outline-none border-b-1 hover:border-orange focus:border-b-2 focus:border-orange"
               />
             </div>
-            <p class="font-bold text-sm mt-2 text-red">{{$errors->first('password')}}</p>
+            <p class="font-bold text-sm mt-2 text-red">{{$errors->get('password')}}</p>
             <div class="flex flex-row justify-between mt-5 items-center">
               <label for="remember_me" class="flex items-center cursor-pointer"
                 ><input
