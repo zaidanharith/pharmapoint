@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Medicines;
+use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class TransactionDetailFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'transaction_id'=>Transaction::factory(),
+            'medicine_id'=>Medicines::factory(),
+            'medicine_quantity'=>fake()->numberBetween(1,100),
+            'subtotal'=>fake()->numberBetween(1,100000)
         ];
     }
 }

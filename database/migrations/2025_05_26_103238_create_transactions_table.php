@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id()->primary()->autoIncrement();
-            $table->timestamp('transaction_date');
-            $table->unsignedBigInteger('total_payment');
+            $table->unsignedBigInteger('grand_total');
+            $table->string('payment_method');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });

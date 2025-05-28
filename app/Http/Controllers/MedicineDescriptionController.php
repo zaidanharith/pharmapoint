@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Medicine_Description;
+use App\Models\MedicineDescription;
 use App\Http\Requests\StoreMedicine_DescriptionRequest;
 use App\Http\Requests\UpdateMedicine_DescriptionRequest;
 
@@ -35,7 +35,7 @@ class MedicineDescriptionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Medicine_Description $medicine_Description)
+    public function show(MedicineDescription $medicine_Description)
     {
         //
     }
@@ -43,7 +43,7 @@ class MedicineDescriptionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Medicine_Description $medicine_Description)
+    public function edit(MedicineDescription $medicine_Description)
     {
         //
     }
@@ -51,7 +51,7 @@ class MedicineDescriptionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMedicine_DescriptionRequest $request, Medicine_Description $medicine_Description)
+    public function update(UpdateMedicine_DescriptionRequest $request, MedicineDescription $medicine_Description)
     {
         //
     }
@@ -59,7 +59,7 @@ class MedicineDescriptionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Medicine_Description $medicine_Description)
+    public function destroy(MedicineDescription $medicine_Description)
     {
         //
     }

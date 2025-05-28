@@ -33,20 +33,20 @@
               </div>
               <div class="w-full grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-10">
                @foreach ($medicines as $medicine)
-               <a href="/katalog/{{$medicine['id']}}" class="flex flex-col max-h-75 overflow-hidden rounded-lg shadow-md w-full sm:aspect-square hover:bg-peach hover:border-1 group border-orange hover:shadow-lg cursor-pointer transition-all duration-200">
+               <a href="/katalog/{{$medicine['slug']}}" class="flex flex-col max-h-75 overflow-hidden rounded-lg shadow-md w-full sm:aspect-square hover:bg-peach hover:border-1 group border-orange hover:shadow-lg cursor-pointer transition-all duration-200">
                     <img
-                        src="img/catalogue/{{$img->random()}}.jpg"
-                        alt="Gambar {{$medicine['name']}}"
+                        src="img/catalogue/{{$medicine->image}}.jpg"
+                        alt="{{$medicine->name}}"
                         class="w-full h-5/9 object-cover bg-center transition-all duration-300 ease-in-out transform origin-bottom group-hover:scale-110"
                     />
                     <div class="flex flex-col h-4/9 justify-center px-5">
                       <div class="flex justify-between items-center">
-                        <h2 class="font-bold text-md">{{Str::limit($medicine['name'],10)}}</h2>
+                        <h2 class="font-bold text-md">{{Str::limit($medicine->name,10)}}</h2>
                         <p class="font-medium text-sm">{{$medicine->category->name}}</p>
                       </div>
-                      <h3 class="font-extrabold text-xl text-blue-dark mt-1 mb-3">Rp. {{$medicine['price']}}</h3>
+                      <h3 class="font-extrabold text-xl text-blue-dark mt-1 mb-3">Rp. {{$medicine->price}}</h3>
                       <h4 class="flex items-center">
-                          <p class="font-bold text-sm text-green">Stok: <span>{{$medicine['stock']}}</span></p>
+                          <p class="font-bold text-sm text-green">Stok: <span>{{$medicine->stock}}</span></p>
                       </h4>
                     </div>
                 </a>                

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id()->primary()->autoIncrement();
             $table->string('name');
+            $table->string('username')->unique();
             $table->string('email')->unique();
             $table->boolean('is_admin')->default(false);
             $table->boolean('is_owner')->default(false);

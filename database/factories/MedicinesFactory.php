@@ -20,9 +20,11 @@ class MedicinesFactory extends Factory
     {
         return [
             'name'=>fake()->word(10),
+            'slug'=>fake()->slug(2),
             'price'=>fake()->numberBetween(10000,100000),
             'stock'=>fake()->numberBetween(1,100),
-            'category_id'=>fake()->numberBetween(1,7)
+            'image'=>fake()->numberBetween(1,5),
+            'category_id'=>Category::factory()
         ];
     }
 }

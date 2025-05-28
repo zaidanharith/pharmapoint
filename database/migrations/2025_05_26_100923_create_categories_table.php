@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id()->primary()->autoIncrement();
             $table->string('name');
+            $table->string('slug');
             $table->timestamps();
         });
     }

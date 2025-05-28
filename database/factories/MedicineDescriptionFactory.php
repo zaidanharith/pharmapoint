@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Medicines;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class MedicineDescriptionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'medicine_id'=>Medicines::factory(),
+            'description'=>fake()->sentence(4)
         ];
     }
 }

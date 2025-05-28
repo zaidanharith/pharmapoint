@@ -14,15 +14,17 @@ Route::get('/', function () {
 
 Route::get('/katalog', function () {
     return view('catalogue',[
-        'title'=>'Katalog', 'medicines' => Medicines::all(), 'img'=>collect([1,2,3,4,5])
+        'title'=>'Katalog', 'medicines' => Medicines::all()
     ]); 
 });
 
-Route::get('/katalog/{id}', function ($id) {
+Route::get('/katalog/{medicine:slug}', function (Medicines $medicine) {
     return view('catalogue-detail',[
-        'medicine' => Medicines::find($id)
+        'title' => $medicine->name, 'medicine'=>$medicine
     ]); 
 });
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
