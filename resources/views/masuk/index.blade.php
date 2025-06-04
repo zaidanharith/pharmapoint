@@ -50,10 +50,10 @@
                <label
                  for="email"
                  class="font-bold after:content-['*'] after:text-red after:ml-1 peer-invalid:text-red"
-                 >Alamat Email</label
+                 >Alamat Email atau Username</label
                >
                <input
-                 type="email"
+                 type="text"
                  name="email"
                  id="email"
                  placeholder="walid@example.com"
