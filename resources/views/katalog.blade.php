@@ -24,7 +24,7 @@
                     class="outline-none hover:border-orange focus:border-b-2 focus:border-orange"
                   />
                 </form>
-                <div class="flex">
+                <div class="flex items-center">
                   <div class="flex cursor-pointer hover:font-medium hover:text-blue-navy mr-4">
                     <span class="material-symbols-outlined"> filter_alt </span>
                     <p>Kategori</p>
@@ -33,6 +33,12 @@
                     <span class="material-symbols-outlined"> sort </span>
                     <p>Urutkan</p>
                   </div>
+                  @auth
+                  <div class="flex items-center px-4 py-2 rounded-lg bg-blue-dark ml-5 hover:bg-blue-dark/90 text-white cursor-pointer transition-all duration-200">
+                    <span class="material-symbols-outlined"> add </span>
+                    <p class="ml-1">Tambah Produk</p>
+                  </div>
+                  @endauth    
               </div>
               </div>
               <div class="w-full grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-10">
