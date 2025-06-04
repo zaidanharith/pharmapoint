@@ -112,6 +112,7 @@
              <label for="is_admin" class="flex items-center cursor-pointer"
                ><input
                  type="checkbox"
+                 {{ old('remember') ? 'checked' : '' }}
                  name="is_admin"
                  id="is_admin"
                  value="1"

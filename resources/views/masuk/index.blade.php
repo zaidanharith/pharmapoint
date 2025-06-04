@@ -18,6 +18,20 @@
         </div>
     </div>
   @endif
+  @if(session()->has('loginError'))
+    <div class="fixed top-10 left-1/2 bg-red-100 border-red-500 text-red-700 px-3 py-1.5 rounded-md shadow-lg z-50 animate-fade-in-down" 
+         role="alert"
+         x-data="{ show: true }"
+         x-show="show"
+         x-init="setTimeout(() => show = false, 3000)">
+        <div class="flex items-center">
+            <p class="font-medium">{{ session('loginError') }}</p>
+            <button type="button" class="ml-4" @click="show = false">
+                <span class="material-symbols-outlined cursor-pointer">close</span>
+            </button>
+        </div>
+    </div>
+  @endif
      <div class="container mx-auto max-w-lg xl:max-w-7xl text-black border-1 bg-white rounded-3xl  overflow-hidden shadow-lg flex">
          <div class="hidden xl:w-1/2 xl:flex h-full">
              <img src="img/pharmacy.jpg" alt="Medicine" class="h-full object-cover">
@@ -43,9 +57,12 @@
                  name="email"
                  id="email"
                  placeholder="walid@example.com"
-                 required autofocus
+                 required autofocus value="{{ old('email') }}"
                  class="py-1.5 outline-none border-b-1 hover:border-orange focus:border-b-2 focus:border-orange"
                />
+               @error('email')
+               <p class="font-bold text-sm mt-2 text-red">{{$message}}</p>
+               @enderror
              </div>
              <div class="flex flex-col mt-5">
                <label
@@ -58,14 +75,19 @@
                  name="password"
                  id="password"
                  placeholder="********"
-                 required autocomplete="current-password"
+                 required
                  class="py-1.5 outline-none border-b-1 hover:border-orange focus:border-b-2 focus:border-orange"
                />
+               @error('password')
+               <p class="font-bold text-sm mt-2 text-red">{{$message}}</p>
+               @enderror
              </div>
              <div class="flex flex-row justify-between mt-5 items-center">
                <label for="remember_me" class="flex items-center cursor-pointer"
                  ><input
                    type="checkbox"
+                   value="1"
+                   {{ old('remember') ? 'checked' : '' }}
                    name="remember_me"
                    id="remember_me"
                    class="appearance-none peer"
