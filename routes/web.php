@@ -29,7 +29,7 @@ Route::get('/katalog/{medicine:slug}', function (Medicines $medicine) {
 Route::get('/masuk', [ LoginController::class,'index'])->middleware('guest');
 Route::post('/masuk', [ LoginController::class,'authenticate']);
 
-Route::get('/daftar', [ RegisterController::class,'index'])->miniddleware('guest');
+Route::get('/daftar', [ RegisterController::class,'index'])->middleware('guest');
 Route::post('/daftar', [ RegisterController::class,'create']);
 
 Route::get('/dashboard', [ DashboardController::class,'index'])->middleware('auth')->name('dashboard');
