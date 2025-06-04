@@ -1,6 +1,6 @@
 
 <x-header>
-    <x-slot:title>{{"Tes"}}</x-slot:title>
+    <x-slot:title>{{"Masuk"}}</x-slot:title>
 </x-header>
 
 <section id="login" class="select-none min-h-screen bg-blue-dark p-10 xl:flex xl:flex-col xl:justify-center">

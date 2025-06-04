@@ -21,7 +21,7 @@
             class="flex flex-col md:flex-row md:justify-between items-center"
           >
             <a
-              href="/# "
+              href="/ "
               class="px-4 py-5 hover:text-orange md:p-0 md:ml-7"
               >Beranda</a
             >
@@ -34,12 +34,12 @@
               >Katalog</a
             >
             <a
-              href="/login"
+              href="/masuk"
               class="px-4 py-5 hover:scale-105 md:p-0 md:ml-7 md:font-bold text-orange"
               >Masuk</a
             >
             <a
-              href="/register"
+              href="/daftar"
               class="px-4 py-5 hover:text-orange md:ml-7 md:bg-orange md:py-1 md:px-3 md:rounded-md md:text-black md:font-bold md:hover:text-black md:hover:bg-orange/90"
               >Daftar</a
             >
