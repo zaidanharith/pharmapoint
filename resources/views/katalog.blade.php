@@ -34,11 +34,13 @@
                     <p>Urutkan</p>
                   </div>
                   @auth
-                  <div class="flex items-center px-4 py-2 rounded-lg bg-blue-dark ml-5 hover:bg-blue-dark/90 text-white cursor-pointer transition-all duration-200">
+                  @if (auth()->user()->is_admin || auth()->user()->is_owner)
+                  <a href="/katalog/tambah" class="flex items-center px-4 py-2 rounded-lg bg-blue-dark ml-5 hover:bg-blue-dark/90 text-white cursor-pointer transition-all duration-200">
                     <span class="material-symbols-outlined"> add </span>
                     <p class="ml-1">Tambah Produk</p>
-                  </div>
-                  @endauth    
+                  </a>                  
+                  @endif
+                  @endauth
               </div>
               </div>
               <div class="w-full grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-10">

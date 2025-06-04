@@ -20,6 +20,12 @@ Route::get('/katalog', function () {
     ]); 
 });
 
+Route::get('/katalog/tambah', function () {
+    return view('tambah-katalog',[
+        'title'=>'Tambah Katalog'
+    ]); 
+})->middleware(['auth', 'admin']);
+
 Route::get('/katalog/{medicine:slug}', function (Medicines $medicine) {
     return view('detail-katalog',[
         'title' => $medicine->name, 'medicine'=>$medicine
