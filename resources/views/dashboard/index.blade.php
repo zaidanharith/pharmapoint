@@ -28,34 +28,7 @@
             </div>
 
             @if (auth()->user()->is_admin)
-    <h1>Halo Admin</h1>
-    {{-- Form Tambah Obat --}}
-    <div class="mt-4 mb-4 p-4 border rounded bg-gray-100">
-        <h2 class="font-bold mb-2">Tambah Obat Baru</h2>
-        <form action="{{ route('item.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="mb-2">
-                <label>Nama Obat</label>
-                <input type="text" name="name" class="form-control" required>
-            </div>
-            <div class="mb-2">
-                <label>Deskripsi</label>
-                <textarea name="description" class="form-control" required></textarea>
-            </div>
-            <div class="mb-2">
-                <label>Harga</label>
-                <input type="number" name="price" class="form-control" required>
-            </div>
-            <div class="mb-2">
-                <label>Gambar</label>
-                <input type="file" name="image" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success mt-2">Tambah Obat</button>
-        </form>
-    </div>
-@endif
-
-
+                <h1>Halo Admin</h1>
             @elseif (auth()->user()->is_owner)
                 <h1>Halo Owner</h1>
             @else
