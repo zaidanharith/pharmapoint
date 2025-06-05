@@ -7,6 +7,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Models\Category;
+use App\Models\MedicineDescription;
 
 Route::get('/', function () {
     return view('beranda',[
@@ -22,13 +24,20 @@ Route::get('/katalog', function () {
 
 Route::get('/katalog/tambah', function () {
     return view('tambah-katalog',[
-        'title'=>'Tambah Katalog'
+        'title'=>'Tambah Katalog', 'categories' => Category::all()
     ]); 
 })->middleware('auth'); 
 
 Route::get('/katalog/{medicine:slug}', function (Medicines $medicine) {
     return view('detail-katalog',[
-        'title' => $medicine->name, 'medicine'=>$medicine
+        'title' => $medicine->name, 'medicine'=>$medicine,
+        'medicine_description' => MedicineDescription::all()
+    ]); 
+});
+
+Route::get('/katalog/{medicine:slug}/ubah', function (Medicines $medicine) {
+    return view('ubah-katalog',[
+        'title' => 'Ubah Katalog', 'medicine'=>$medicine, 'medicine_description' => MedicineDescription::where('medicine_id', $medicine->id)
     ]); 
 });
 

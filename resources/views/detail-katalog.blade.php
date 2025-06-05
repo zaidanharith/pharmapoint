@@ -15,10 +15,10 @@
                               @auth
                               @if (auth()->user()->is_admin || auth()->user()->is_owner)
                               <div class="flex mt-5 justify-between gap-x-4">
-                                   <a href=""class="px-3 py-2 bg-blue-dark rounded-lg font-medium text-white flex items-center hover:bg-blue-dark/90 w-1/2 justify-center"><span class="material-symbols-outlined mr-1">
+                                   <a href="/katalog/{{ $medicine->slug }}/ubah" class="px-3 py-2 bg-blue-dark rounded-lg font-medium text-white flex items-center hover:bg-blue-dark/90 w-1/2 justify-center"><span class="material-symbols-outlined mr-1">
                                    edit
                                    </span>Ubah Detail</a>
-                                   <a href=""class="px-3 py-2 bg-red-600 rounded-lg font-medium text-white flex items-center hover:bg-red-700 w-1/2 justify-center"><span class="material-symbols-outlined mr-1">
+                                   <a href="/katalog/{{ $medicine->slug }}/hapus" class="px-3 py-2 bg-red-600 rounded-lg font-medium text-white flex items-center hover:bg-red-700 w-1/2 justify-center"><span class="material-symbols-outlined mr-1">
                                    <span class="material-symbols-outlined">
                                    delete_forever
                                    </span>
@@ -32,8 +32,10 @@
                          <div class="flex flex-col w-4/9">
                               <h2 class="font-extrabold text-2xl text-bg-dark mb-3 text-blue-dark">{{$medicine->name}}</h2>
                               <h3 class="font-bold text-sm mb-5">Kategori: {{$medicine->category->name}}</h3>
-                              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis dolorem ab reprehenderit accusantium debitis! Repellat exercitationem hic mollitia ad ipsum vitae aliquid rem quod suscipit velit consectetur placeat rerum inventore, odio tempora adipisci porro quas quibusdam accusantium. Aut quia magnam officia tempora ullam, reprehenderit odit impedit nostrum repellendus, harum veniam facilis? Minima sunt iure corporis beatae illo. Porro voluptas dolores non, vitae sit laudantium. Iusto atque quidem dolorum sunt? Odit tempora hic alias minus libero quaerat aperiam laudantium facere error, commodi deleniti incidunt a, repellendus eligendi recusandae, doloribus deserunt magnam quas provident ratione eos cum suscipit quae? Repellendus, architecto non.</p>
-                              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt cupiditate at ad, commodi quis nemo obcaecati maxime, illum tempore, quaerat qui harum eligendi voluptas. Minus, vitae. Cumque delectus, voluptatem laboriosam esse est vero iure provident? Consequatur sequi saepe totam nihil officiis debitis numquam nesciunt, hic nisi fuga, rem enim accusantium nam, voluptas perferendis voluptatum fugiat. Perferendis tempora magni alias minus corporis, iusto dolore voluptatibus aspernatur reprehenderit doloribus veritatis distinctio in possimus laudantium temporibus magnam. Qui.</p>
+                              @foreach ($medicine_description as $description)
+                                   <p>{{ $description->description }}</p>
+                              @endforeach
+                              {{-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab neque asperiores fugit inventore voluptas dolore quis voluptatibus expedita, sed repudiandae molestiae assumenda, veritatis sint dolorem, dolorum nemo quam provident. Dignissimos, error aperiam facere labore assumenda commodi nostrum laboriosam, tenetur debitis officiis velit sed omnis aliquid? Repellat in doloremque aperiam ullam.</p> --}}
                          </div>
                          <div class="flex flex-col w-2/9 rounded-lg shadow-md p-7 border-1 border-orange">
                               <h2 class="font-extrabold text-xl text-bg-dark mb-4 text-blue-dark">Pesan</h2>
