@@ -30,9 +30,32 @@
             @if (auth()->user()->is_admin)
                 <h1>Halo Admin</h1>
             @elseif (auth()->user()->is_owner)
-                <h1>Halo Owner</h1>
+                <div class="flex flex-col mt-10 border-y-1 border-gray-300 overflow-hidden px-4 md:px-10 md:py-7">
+                    <h2 class="font-bold text-xl mb-2">Permintaan Upgrade Admin</h2>
+                    <div class="flex flex-col mt-5 gap-y-3">
+                        @foreach ($users as $user)
+                            @if ($user->is_admin)
+                            <div class="flex justify-between items-center p-4 rounded-lg mb-3 shadow-sm">
+                                <div class="flex flex-col">
+                                    <h2 class="font-bold text-lg">{{ $user->name }}</h2>
+                                    <p class="text-gray-500 text-sm">{{ $user->email }}</p>
+                                </div class="flex justify-between items-center">
+                                {{-- jika tombol diklik, ubah is_admin jadi true --}}
+                                <div class="flex items-center">
+                                    <a href="" class="flex items-center rounded-md bg-green-500 font-medium px-3 py-1.5 cursor-pointer hover:bg-green-400 mr-3"><span class="material-symbols-outlined mr-1">check</span>Terima</a>
+                                    <a href="" class="flex items-center rounded-md bg-red-500 font-medium px-3 py-1.5 cursor-pointer hover:bg-red-400 text-white"><span class="material-symbols-outlined mr-1">close</span>Tolak</a>
+                                </div>
+                            </div>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
             @else
-                <h1>Halo User</h1>
+                <div class="flex flex-col rounded-md shadow-md overflow-hidden px-4 md:px-10 py-7 md:py-10">
+                    <h2 class="font-bold text-lg">Informasi Akun</h2>
+                    <p class="text-gray-500 text-sm">Email: {{ auth()->user()->email }}</p>
+                    <p class="text-gray-500 text-sm">Dibuat pada: {{ auth()->user()->created_at->format('d M Y') }}</p>
+                </div>
             @endif
 
         </div>
