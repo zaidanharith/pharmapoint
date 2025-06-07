@@ -1,14 +1,15 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Medicines;
 use Illuminate\Support\Str;
+use App\Models\MedicineDescription;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
-use App\Models\Category;
-use App\Models\MedicineDescription;
+use App\Http\Controllers\MedicinesController;
 
 Route::get('/', function () {
     return view('beranda',[
@@ -18,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('/katalog', function () {
     return view('katalog',[
-        'title'=>'Katalog', 'medicines' => Medicines::filter()->orderBy('name')->paginate(15)
+        'title'=>'Katalog', 'medicines' => Medicines::filter()->orderBy('name')->paginate(15), 'categories' => Category::all() 
     ]); 
 });
 
@@ -28,12 +29,16 @@ Route::get('/katalog/tambah', function () {
     ]); 
 })->middleware('auth'); 
 
+Route::post('/katalog/tambah', [MedicinesController::class, 'store'])->middleware('auth');
+
 Route::get('/katalog/{medicine:slug}', function (Medicines $medicine) {
     return view('detail-katalog',[
         'title' => $medicine->name, 'medicine'=>$medicine,
         'medicine_description' => MedicineDescription::all()
     ]); 
 });
+
+Route::delete('/katalog/{medicine:slug}',[MedicinesController::class, 'destroy'])->middleware('auth');
 
 Route::get('/katalog/{medicine:slug}/ubah', function (Medicines $medicine) {
     return view('ubah-katalog',[

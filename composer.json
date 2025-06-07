@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "cviebrock/eloquent-sluggable": "^12.0",
         "illuminate/container": "*",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.1",

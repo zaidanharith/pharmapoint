@@ -109,12 +109,12 @@
              @enderror
            </div>
            <div class="flex flex-row justify-between mt-5 items-center">
-             <label for="is_admin" class="flex items-center cursor-pointer"
+             <label for="request_admin" class="flex items-center cursor-pointer"
                ><input
                  type="checkbox"
                  {{ old('remember') ? 'checked' : '' }}
-                 name="is_admin"
-                 id="is_admin"
+                 name="request_admin"
+                 id="request_admin"
                  value="1"
                  class="appearance-none peer"
                />

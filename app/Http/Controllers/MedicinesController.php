@@ -61,6 +61,8 @@ class MedicinesController extends Controller
      */
     public function destroy(Medicines $medicines)
     {
-        //
+        Medicines::destroy($medicines->id);
+
+        return redirect('/katalog')->with('success', "Produk berhasil dihapus dari katalog.");
     }
 }

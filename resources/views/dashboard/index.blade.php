@@ -4,7 +4,7 @@
     {{-- KATALOG START --}}
     <section id="catalogue" class="py-30 text-black">
         <div class="container mx-auto px-4">
-            <div class="flex justify-between mb-5">
+            <div class="flex justify-between mb-5 items-center">
                 @php
                     date_default_timezone_set('Asia/Jakarta');
                     $hour = date('H');
@@ -17,8 +17,13 @@
                     } else { 
                         $greeting = 'Selamat Malam';
                     }
+
+                    $role = auth()->user()->is_admin ? 'Admin' : (auth()->user()->is_owner ? 'Owner' : 'User'); 
                 @endphp
-                <h1 class="font-extrabold text-4xl text-blue-dark">{{ $greeting }}, {{ auth()->user()->name }}</h1>
+                <div class="flex items-center">
+                    <h1 class="font-extrabold text-4xl text-blue-dark">{{ $greeting }}, {{ auth()->user()->name }}</h1>
+                    <p class="text-sm ml-3 rounded-md px-1 text-white {{ $role === 'Admin' ? 'bg-green-600' : ($role === 'Owner' ? 'bg-amber-600' : 'bg-gray-600') }}">{{ $role }}</p>
+                </div>
                 <div class="text-black font-bold flex items-center">
                     <span class="material-symbols-outlined">
                         calendar_month
@@ -34,17 +39,18 @@
                     <h2 class="font-bold text-xl mb-2">Permintaan Upgrade Admin</h2>
                     <div class="flex flex-col mt-5 gap-y-3">
                         @foreach ($users as $user)
-                            @if ($user->is_admin)
+                            @if ($user->request_admin)
                             <div class="flex justify-between items-center p-4 rounded-lg mb-3 shadow-sm">
                                 <div class="flex flex-col">
                                     <h2 class="font-bold text-lg">{{ $user->name }}</h2>
                                     <p class="text-gray-500 text-sm">{{ $user->email }}</p>
                                 </div class="flex justify-between items-center">
                                 {{-- jika tombol diklik, ubah is_admin jadi true --}}
-                                <div class="flex items-center">
-                                    <a href="" class="flex items-center rounded-md bg-green-500 font-medium px-3 py-1.5 cursor-pointer hover:bg-green-400 mr-3"><span class="material-symbols-outlined mr-1">check</span>Terima</a>
-                                    <a href="" class="flex items-center rounded-md bg-red-500 font-medium px-3 py-1.5 cursor-pointer hover:bg-red-400 text-white"><span class="material-symbols-outlined mr-1">close</span>Tolak</a>
-                                </div>
+                                <form action="/dashboard" method="POST" class="flex items-center">
+                                    @csrf
+                                    <button type="submit" class="flex items-center rounded-md bg-green-500 font-medium px-3 py-1.5 cursor-pointer hover:bg-green-400 mr-3"><span class="material-symbols-outlined mr-1">check</span>Terima</button>
+                                    <button type="submit" class="flex items-center rounded-md bg-red-500 font-medium px-3 py-1.5 cursor-pointer hover:bg-red-400 text-white"><span class="material-symbols-outlined mr-1">close</span>Tolak</button>
+                                </form>
                             </div>
                             @endif
                         @endforeach

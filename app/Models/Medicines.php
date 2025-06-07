@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Medicines extends Model
 {
     /** @use HasFactory<\Database\Factories\MedicinesFactory> */
-    use HasFactory;
+    use HasFactory, Sluggable;
 
     protected $fillable = ['name','slug','price','stock', 'category_id'];
     protected $with = ['category'];
@@ -33,8 +34,18 @@ class Medicines extends Model
         $query->where('name','LIKE','%'.request('search').'%');
     }
 
-    // public function setSlugAttribute($value)
-    // {
-    //     $this->attributes['slug'] = Str::slug($this->name);
-    // }
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+                'onUpdate' => true,
+                'separator' => '-',
+                'unique' => true,
+                'method' => function ($string) {
+                    return Str::slug($string, '-', 'id');
+                },
+            ],
+        ];
+    }
 }

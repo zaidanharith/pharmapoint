@@ -9,7 +9,7 @@
          role="alert"
          x-data="{ show: true }"
          x-show="show"
-         x-init="setTimeout(() => show = false, 3000)">
+         x-init="setTimeout(() => show = false, 10000)">
         <div class="flex items-center">
             <p class="font-medium">{{ session('success') }}</p>
             <button type="button" class="ml-4" @click="show = false">
@@ -23,7 +23,7 @@
          role="alert"
          x-data="{ show: true }"
          x-show="show"
-         x-init="setTimeout(() => show = false, 3000)">
+         x-init="setTimeout(() => show = false, 10000)">
         <div class="flex items-center">
             <p class="font-medium">{{ session('loginError') }}</p>
             <button type="button" class="ml-4" @click="show = false">
@@ -57,7 +57,7 @@
                  name="email"
                  id="email"
                  placeholder="walid@example.com"
-                 required autofocus value="{{ old('email') || old('username') }}"
+                 required autofocus value="{{ old('email', 'username') }}"
                  class="py-1.5 outline-none border-b-1 hover:border-orange focus:border-b-2 focus:border-orange"
                />
                @error('email')

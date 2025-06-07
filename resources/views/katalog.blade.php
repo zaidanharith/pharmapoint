@@ -7,7 +7,17 @@
             <h1 class="font-extrabold text-4xl text-blue-dark mb-10 text-center md:text-left">
               Katalog
             </h1>
-            <div class="flex flex-col rounded-md shadow-md overflow-hidden px-4 md:px-10 py-7 md:py-10">
+            @if (session()->has('success'))
+            <div role="alert" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 10000)">
+              <div class="flex justify-between items-center rounded-lg border-1 border-green-600 bg-green-50 text-green-600 mb-5 px-10 py-5">
+                <h3 class="font-medium text-md">{{session('success')}}</h3>
+                <button type="button" class="" @click="show = false">
+                  <span class="material-symbols-outlined cursor-pointer">close</span>
+                </button>
+              </div>
+            </div>
+            @endif
+            <div class="flex flex-col rounded-md shadow-md overflow-hidden px-4 py-7 md:p-10">
               <div class="w-full flex justify-between">
                 <form class="flex">
                   <label for="search" class="flex items-center"
@@ -29,6 +39,7 @@
                     <span class="material-symbols-outlined"> filter_alt </span>
                     <p>Kategori</p>
                   </div>
+                  
                   <div class="flex cursor-pointer hover:font-medium hover:text-blue-navy">
                     <span class="material-symbols-outlined"> sort </span>
                     <p>Urutkan</p>

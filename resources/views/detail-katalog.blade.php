@@ -18,14 +18,19 @@
                                    <a href="/katalog/{{ $medicine->slug }}/ubah" class="px-3 py-2 bg-blue-dark rounded-lg font-medium text-white flex items-center hover:bg-blue-dark/90 w-1/2 justify-center"><span class="material-symbols-outlined mr-1">
                                    edit
                                    </span>Ubah Detail</a>
-                                   <a href="/katalog/{{ $medicine->slug }}/hapus" class="px-3 py-2 bg-red-600 rounded-lg font-medium text-white flex items-center hover:bg-red-700 w-1/2 justify-center"><span class="material-symbols-outlined mr-1">
-                                   <span class="material-symbols-outlined">
+                                   <button id="delete-katalog-btn" class="px-3 py-2 bg-red-600 rounded-lg font-medium text-white flex items-center hover:bg-red-700 w-1/2 justify-center cursor-pointer"><span class="material-symbols-outlined mr-1">
                                    delete_forever
-                                   </span>
-                                   </span>Hapus</a>
-
+                                   </span>Hapus</button>
                               </div>
-                              </a>                  
+                              <form id="delete-katalog-form" action="/katalog/{{ $medicine->slug }}" method="POST" class="mt-7 p-5 rounded-lg bg-red-50 border-1 border-red-600 hidden transition-all duration-200">
+                                   @method('delete')
+                                   @csrf
+                                   <p class="font-medium">Apakah Anda yakin ingin menghapus produk {{ $medicine->name }}?</p>
+                                   <div class="flex gap-3 mt-3">
+                                        <button type="button" class="px-3 py-1 text-sm bg-gray-200 rounded-md cursor-pointer hover:bg-gray-300" id="cancel-delete-katalog-btn">Batal</button>
+                                        <button type="submit" class="px-3 py-1 bg-red-600 rounded-lg font-medium text-white flex items-center hover:bg-red-700 cursor-pointer">Hapus</button>
+                                   </div>
+                              </form>
                               @endif
                               @endauth
                          </div>
@@ -35,7 +40,6 @@
                               @foreach ($medicine_description as $description)
                                    <p>{{ $description->description }}</p>
                               @endforeach
-                              {{-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab neque asperiores fugit inventore voluptas dolore quis voluptatibus expedita, sed repudiandae molestiae assumenda, veritatis sint dolorem, dolorum nemo quam provident. Dignissimos, error aperiam facere labore assumenda commodi nostrum laboriosam, tenetur debitis officiis velit sed omnis aliquid? Repellat in doloremque aperiam ullam.</p> --}}
                          </div>
                          <div class="flex flex-col w-2/9 rounded-lg shadow-md p-7 border-1 border-orange">
                               <h2 class="font-extrabold text-xl text-bg-dark mb-4 text-blue-dark">Pesan</h2>
@@ -48,4 +52,24 @@
           </div>
      </section>
      {{-- KATALOG DETAIL END --}}
+
+     <script>
+          const deleteKatalogBtn = document.querySelector("#delete-katalog-btn");
+          const cancelDeleteKatalogBtn = document.querySelector(
+          "#cancel-delete-katalog-btn"
+          );
+          const deleteKatalogForm = document.querySelector("#delete-katalog-form");
+
+          deleteKatalogBtn.addEventListener("click", function () {
+               if (deleteKatalogForm.style.display === "block") {
+                    deleteKatalogForm.style.display = "none";
+               } else {
+                    deleteKatalogForm.style.display = "block";
+               }
+          });
+
+          cancelDeleteKatalogBtn.addEventListener("click", function () {
+          deleteKatalogForm.style.display = "none";
+          });
+     </script>
 </x-layout>
