@@ -9,7 +9,7 @@
         { "src": "/(.*)", "dest": "/api/index.php" }
     ],
     "public": true,
-    "buildCommand": "composer run dev",
+    "buildCommand": "npm run dev",
     "outputDirectory": "public",
     "env": {
         "APP_ENV": "production",
