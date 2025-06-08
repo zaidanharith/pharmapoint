@@ -8,18 +8,18 @@
             </h1>
             <div class="flex flex-col rounded-md shadow-md overflow-hidden px-4 md:px-10 py-7 md:py-10">
               <a href="/katalog" class="flex items-center hover:font-bold group transition-all duration-200"><span class="material-symbols-outlined mr-1 group-hover:-translate-x-3 transition-all duration-200 ease-in-out">arrow_back</span>Kembali ke Katalog</a>
-              <form action="/katalog/tambah" method="POST" enctype="multipart/form-data">
-                <div class="flex flex-col mt-7">
-                  <h2 class="font-bold text-lg mb-3">Masukkan Data Produk Baru!</h2>
+              <h2 class="font-bold text-xl mt-10">Masukkan Data Produk Baru!</h2>
+              <form action="/katalog/tambah" method="POST" enctype="multipart/form-data" class="flex w-full ">
+                <div class="flex flex-col w-1/3">
                   @csrf
-                  <div class="flex flex-col mt-5 w-1/3">
+                  <div class="flex flex-col mt-5">
                     <label for="name" class="font-medium after:content-['*'] after:text-red after:ml-1">Nama Produk</label>
                     <input type="text" name="name" id="name" placeholder="Paracetamol" value="{{ old('name') }}" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
                     @error('name')
                         <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
                     @enderror
                   </div>
-                  <div class="flex flex-col mt-5 w-1/3">
+                  <div class="flex flex-col mt-5">
                     <label for="name" class="font-medium after:content-['*'] after:text-red after:ml-1">Kategori</label>
                     <select name="category_id" id="category_id" class="outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange cursor-pointer" required>
                       @foreach ($categories as $category)
@@ -34,7 +34,7 @@
                         <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
                     @enderror
                   </div>
-                  <div class="flex mt-5 w-1/3 items-center">
+                  <div class="flex mt-5 items-center">
                     <div class="flex flex-col gap--5">
                       <label for="name" class="font-medium after:content-['*'] after:text-red after:ml-1">Harga</label>
                       <div class="flex items-center">
@@ -45,7 +45,7 @@
                         <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
                       @enderror
                     </div>
-                    <div class="flex flex-col w-1/3 ml-5">
+                    <div class="flex flex-col ml-5">
                       <label for="stock" class="font-medium after:content-['*'] after:text-red after:ml-1">Jumlah Stok</label>
                       <input type="number" name="stock" id="stock" placeholder="50" value="{{ old('stock') }}" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
                       @error('stock')
@@ -53,7 +53,7 @@
                       @enderror
                     </div>
                   </div>
-                  <div class="flex flex-col mt-5 w-1/3">
+                  <div class="flex flex-col mt-5">
                     <label for="description" class="font-medium after:content-['*'] after:text-red after:ml-1 mb-2">Deskripsi</label>
                     <div id="description-container"></div>
                     <button type="button" class="px-3 py-1 bg-gray-200 rounded-md text-sm hover:bg-gray-300 w-fit flex items-center cursor-pointer" id="add-description-btn">
@@ -63,16 +63,20 @@
                     @error('description')
                         <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
                     @enderror
+                  </div>
+                  <div class="flex flex-col mt-5">
+                    <label for="image" class="font-medium">Gambar Produk</label>
+                    <input type="file" name="image" id="image" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange cursor-pointer" onchange="previewImage(event)">
+                    @error('image')
+                      <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
+                    @enderror
+                  </div>
+                  <button type="submit" class="px-4 py-2 bg-orange font-medium rounded-lg mt-5 flex items-center cursor-pointer hover:bg-orange/90 w-fit"><span class="material-symbols-outlined mr-1"> add </span>Tambah Produk</button>
                 </div>
-                <div class="flex flex-col mt-5 w-1/3">
-                  <label for="image" class="font-medium">Gambar Produk</label>
-                  <input type="file" name="image" id="image" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange cursor-pointer" >
-                  @error('image')
-                    <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
-                  @enderror
+                <div class="flex flex-col w-1/2 mt-5 ml-10">
+                  <h3 class="font-bold">Pratinjau Gambar</h3>
+                  <img src="{{asset('storage/' . $medicine->image)}}" alt="">
                 </div>
-                </div>
-                <button type="submit" class="px-4 py-2 bg-orange font-medium rounded-lg mt-5 flex items-center cursor-pointer hover:bg-orange/90"><span class="material-symbols-outlined mr-1"> add </span>Tambah Produk</button>
               </form>
             </div>
           </div>

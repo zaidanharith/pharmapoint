@@ -110,17 +110,85 @@ class MedicinesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Medicines $medicines)
+    public function edit($slug)
     {
-        //
+        $this->authorize('owner-admin');
+
+        $medicine = Medicines::where('slug', $slug)->firstOrFail();
+
+        return view('ubah-katalog', [
+            'title' => 'Ubah Katalog',
+            'medicine' => $medicine,
+            'categories' => Category::all(),
+            'medicine_description' => MedicineDescription::where('medicine_id', $medicine->id)->get()
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMedicinesRequest $request, Medicines $medicines)
+    public function update(Request $request, $slug)
     {
-        //
+        $this->authorize('owner-admin');
+
+        $medicine = Medicines::where('slug', $slug)->firstOrFail();
+        $messages = [
+            'name.required' => 'Nama obat harus diisi.',
+            'category_id.required' => 'Kategori obat harus dipilih.',
+            'category_id.exists' => 'Kategori obat tidak valid.',
+            'price.required' => 'Harga obat harus diisi.',
+            'price.numeric' => 'Harga obat harus berupa angka.',
+            'price.min' => 'Harga obat tidak boleh kurang dari 0.',
+            'stock.required' => 'Stok obat harus diisi.',
+            'stock.integer' => 'Stok obat harus berupa angka bulat.',
+            'stock.min' => 'Stok obat tidak boleh kurang dari 0.',
+            'image.image' => 'File yang diunggah harus berupa gambar.',
+            'image.mimes' => 'Gambar harus berformat jpg, jpeg, atau png.',
+            'image.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.'
+        ];
+        $validatedData = $request->validate(
+            [
+                'name' => 'required|max:255',
+                'category_id' => 'required|exists:categories,id',
+                'price' => 'required|numeric|min:0',
+                'stock' => 'required|integer|min:0',
+                'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+            ],
+            $messages
+        );
+        $descriptions = $request->input('description');
+        if ($descriptions) {
+            $validatedData['description'] = $descriptions;
+        } else {
+            $validatedData['description'] = null;
+        }
+        unset($validatedData['description']);
+        $validatedData['slug'] = Str::slug($validatedData['name']);
+        if ($request->file('image')) {
+            if ($medicine->image) {
+                $imagePath = public_path('storage/' . $medicine->image);
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
+            $validatedData['image'] = $request->file('image')->store('medicine-images');
+        } else {
+            $validatedData['image'] = $medicine->image;
+        }
+        $medicine->update($validatedData);
+        MedicineDescription::where('medicine_id', $medicine->id)->delete();
+        if ($descriptions) {
+            foreach ($descriptions as $description) {
+                if (!empty($description)) {
+                    $validatedDescriptions[] = [
+                        'medicine_id' => $medicine->id,
+                        'description' => $description
+                    ];
+                }
+            }
+            MedicineDescription::insert($validatedDescriptions);
+        }
+        return redirect("/katalog/{$validatedData['slug']}")->with('success', "Produk {$validatedData['name']} berhasil diubah.");
     }
 
     /**

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Medicines extends Model
 {
     /** @use HasFactory<\Database\Factories\MedicinesFactory> */
-    use HasFactory, Sluggable;
+    use HasFactory;
 
     protected $fillable = ['name','slug','price','stock', 'category_id', 'image'];
     protected $casts = [
@@ -40,18 +40,4 @@ class Medicines extends Model
         $query->where('name','LIKE','%'.request('search').'%');
     }
 
-    public function sluggable(): array
-    {
-        return [
-            'slug' => [
-                'source' => 'name',
-                'onUpdate' => true,
-                'separator' => '-',
-                'unique' => true,
-                'method' => function ($string) {
-                    return Str::slug($string, '-', 'id');
-                },
-            ],
-        ];
-    }
 }

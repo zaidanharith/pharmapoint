@@ -12,7 +12,7 @@
                               <div class="shadow-md overflow-hidden rounded-lg w-full">
                                    <img src="{{ asset('storage/' . $medicine->image) }}" alt="{{ $medicine['name'] }}" class="object-cover w-full">
                               </div>
-                              @auth
+                              @can('owner-admin')
                               <div class="flex mt-5 justify-between gap-x-4">
                                    <a href="/katalog/{{ $medicine->slug }}/ubah" class="px-3 py-2 bg-blue-dark rounded-lg font-medium text-white flex items-center hover:bg-blue-dark/90 w-1/2 justify-center"><span class="material-symbols-outlined mr-1">
                                    edit
@@ -30,8 +30,7 @@
                                         <button type="submit" class="px-3 py-1 bg-red-600 rounded-lg font-medium text-white flex items-center hover:bg-red-700 cursor-pointer">Hapus</button>
                                    </div>
                               </form>
-                              @endif
-                              @endauth
+                              @endcan
                          </div>
                          <div class="flex flex-col w-4/9">
                               <h2 class="font-extrabold text-2xl text-bg-dark mb-3 text-blue-dark">{{$medicine->name}}</h2>

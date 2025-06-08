@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::get('/katalog', function () {
     return view('katalog',[
-        'title'=>'Katalog', 'medicines' => Medicines::filter()->orderBy('name')->paginate(15), 'categories' => Category::all() 
+        'title'=>'Katalog', 'medicines' => Medicines::filter()->orderBy('name')->paginate(16), 'categories' => Category::all() 
     ]); 
 });
 
@@ -31,17 +31,15 @@ Route::post('/katalog/tambah', [MedicinesController::class, 'store']);
 Route::get('/katalog/{medicine:slug}', function (Medicines $medicine) {
     return view('detail-katalog',[
         'title' => $medicine->name, 'medicine'=>$medicine,
-        'medicine_description' => MedicineDescription::all()
+        'medicine_description' => MedicineDescription::where('medicine_id', $medicine->id)->get()
     ]); 
 });
 
 Route::delete('/katalog/{medicine:slug}',[MedicinesController::class, 'destroy'])->middleware('auth');
 
-Route::get('/katalog/{medicine:slug}/ubah', function (Medicines $medicine) {
-    return view('ubah-katalog',[
-        'title' => 'Ubah Katalog', 'medicine'=>$medicine, 'medicine_description' => MedicineDescription::where('medicine_id', $medicine->id)
-    ]); 
-});
+Route::get('/katalog/{medicine:slug}/ubah', [MedicinesController::class, 'edit'])->middleware('auth');
+
+Route::patch('/katalog/{medicine:slug}/ubah', [MedicinesController::class, 'update'])->middleware('auth');
 
 Route::get('/masuk', [ LoginController::class,'index'])->middleware('guest');
 Route::post('/masuk', [ LoginController::class,'authenticate']);
