@@ -14,13 +14,17 @@
                   @csrf
                   <div class="flex flex-col mt-5 w-1/3">
                     <label for="name" class="font-medium after:content-['*'] after:text-red after:ml-1">Nama Produk</label>
-                    <input type="text" name="name" id="name" placeholder="Paracetamol" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
+                    <input type="text" name="name" id="name" placeholder="Paracetamol" value="{{ old('name') }}" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
                   </div>
                   <div class="flex flex-col mt-5 w-1/3">
                     <label for="name" class="font-medium after:content-['*'] after:text-red after:ml-1">Kategori</label>
                     <select name="category_id" id="category_id" class="outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange cursor-pointer" required>
                       @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @if(old('category_id') == $category->id)
+                          <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                        @else
+                          <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endif
                       @endforeach
                     </select>
                   </div>
@@ -29,20 +33,18 @@
                       <label for="name" class="font-medium after:content-['*'] after:text-red after:ml-1">Harga</label>
                       <div class="flex items-center">
                         <span class="text-md font-bold text-blue-dark mr-2 ">Rp</span>
-                        <input type="text" name="price" id="price" placeholder="10000" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
+                        <input type="text" name="price" id="price" placeholder="10000" value="{{ old('price') }}" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
                       </div>
                     </div>
                     <div class="flex flex-col w-1/3 ml-5">
                       <label for="stock" class="font-medium after:content-['*'] after:text-red after:ml-1">Jumlah Stok</label>
-                      <input type="number" name="stock" id="stock" placeholder="50" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
+                      <input type="number" name="stock" id="stock" placeholder="50" value="{{ old('stock') }}" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
                     </div>
                   </div>
                   <div class="flex flex-col mt-5 w-1/3">
                     <label for="description" class="font-medium after:content-['*'] after:text-red after:ml-1 mb-2">Deskripsi</label>
                     <div id="description-container"></div>
-                    <button type="button" 
-                        class="px-3 py-1 bg-gray-200 rounded-md text-sm hover:bg-gray-300 w-fit flex items-center cursor-pointer" 
-                        id="add-description-btn">
+                    <button type="button" class="px-3 py-1 bg-gray-200 rounded-md text-sm hover:bg-gray-300 w-fit flex items-center cursor-pointer" id="add-description-btn">
                         <span class="material-symbols-outlined text-sm">add</span> 
                         Tambah Deskripsi
                     </button>

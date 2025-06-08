@@ -2,7 +2,7 @@
     "version": 2,
     "framework": null,
     "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.6.2" }
+        "api/index.php": { "runtime": "vercel-php@0.6.5" }
     },
     "routes": [
         { "src": "/build/(.*)", "dest": "/public/build/" },
@@ -28,7 +28,6 @@
         "DB_CONNECTION": "mysql",
         "DB_HOST": "4gg.h.filess.io",
         "DB_PORT": "3306",
-        "DB_DATABASE": "db2024_stormtorn",
-        "DB_USERNAME": "db2024_stormtorn"
+        "DB_DATABASE": "db2024_stormtorn"
     }
 }

@@ -25,7 +25,7 @@
                               <form id="delete-katalog-form" action="/katalog/{{ $medicine->slug }}" method="POST" class="mt-7 p-5 rounded-lg bg-red-50 border-1 border-red-600 hidden transition-all duration-200">
                                    @method('delete')
                                    @csrf
-                                   <p class="font-medium">Apakah Anda yakin ingin menghapus produk {{ $medicine->name }}?</p>
+                                   <p class="font-medium">Apakah Anda yakin ingin menghapus produk <span class="font-bold">{{ $medicine->name }}</span>?</p>
                                    <div class="flex gap-3 mt-3">
                                         <button type="button" class="px-3 py-1 text-sm bg-gray-200 rounded-md cursor-pointer hover:bg-gray-300" id="cancel-delete-katalog-btn">Batal</button>
                                         <button type="submit" class="px-3 py-1 bg-red-600 rounded-lg font-medium text-white flex items-center hover:bg-red-700 cursor-pointer">Hapus</button>

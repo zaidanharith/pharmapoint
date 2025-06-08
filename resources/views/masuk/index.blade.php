@@ -57,7 +57,7 @@
                  name="email"
                  id="email"
                  placeholder="walid@example.com"
-                 required autofocus value="{{ old('email', 'username') }}"
+                 required autofocus value="{{ old('email') }}"
                  class="py-1.5 outline-none border-b-1 hover:border-orange focus:border-b-2 focus:border-orange"
                />
                @error('email')

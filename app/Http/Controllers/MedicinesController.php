@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medicines;
+use Illuminate\Support\Str;
 use App\Http\Requests\StoreMedicinesRequest;
 use App\Http\Requests\UpdateMedicinesRequest;
 
@@ -29,7 +30,30 @@ class MedicinesController extends Controller
      */
     public function store(StoreMedicinesRequest $request)
     {
-        //
+
+        dd($request->all());
+        $validatedData = $request->validate(
+            [
+                'name' => 'required|max:255',
+                'description' => 'nullable|string',
+                'category_id' => 'required|exists:categories,id',
+                'price' => 'required|numeric|min:0',
+                'stock' => 'required|integer|min:0',
+                'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+            ]
+        );
+        
+        
+        $validatedData['slug'] = Str::slug($validatedData['name']);
+        
+        // Handle image upload  
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('medicine-images');
+        }
+
+        Medicines::create($validatedData);
+
+        return redirect('/katalog')->with('success', "Produk {$validatedData['name']} berhasil ditambahkan ke katalog.");
     }
 
     /**
@@ -59,10 +83,20 @@ class MedicinesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Medicines $medicines)
+    public function destroy($slug)
     {
-        Medicines::destroy($medicines->id);
+        $medicine = Medicines::where('slug', $slug)->firstOrFail();
+        
+        if ($medicine->image) {
+            $imagePath = public_path('storage/' . $medicine->image);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+        
+        $medicineName = $medicine->name;
+        $medicine->delete();
 
-        return redirect('/katalog')->with('success', "Produk berhasil dihapus dari katalog.");
+        return redirect('/katalog')->with('success', "Produk {$medicineName} berhasil dihapus dari katalog.");
     }
 }
