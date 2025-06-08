@@ -10,10 +10,9 @@
                     <div class="flex gap-15 mt-10 items-start">
                          <div class="flex flex-col w-3/9">
                               <div class="shadow-md overflow-hidden rounded-lg w-full">
-                                   <img src="/img/catalogue/{{ $medicine->image }}.jpg" alt="{{ $medicine['name'] }}" class="object-cover w-full">
+                                   <img src="{{ asset('storage/' . $medicine->image) }}" alt="{{ $medicine['name'] }}" class="object-cover w-full">
                               </div>
                               @auth
-                              @if (auth()->user()->is_admin || auth()->user()->is_owner)
                               <div class="flex mt-5 justify-between gap-x-4">
                                    <a href="/katalog/{{ $medicine->slug }}/ubah" class="px-3 py-2 bg-blue-dark rounded-lg font-medium text-white flex items-center hover:bg-blue-dark/90 w-1/2 justify-center"><span class="material-symbols-outlined mr-1">
                                    edit

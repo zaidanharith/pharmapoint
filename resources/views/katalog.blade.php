@@ -44,21 +44,19 @@
                     <span class="material-symbols-outlined"> sort </span>
                     <p>Urutkan</p>
                   </div>
-                  @auth
-                  @if (auth()->user()->is_admin || auth()->user()->is_owner)
+                  @can('owner-admin')
                   <a href="/katalog/tambah" class="flex items-center px-4 py-2 rounded-lg bg-blue-dark ml-5 hover:bg-blue-dark/90 text-white cursor-pointer transition-all duration-200">
                     <span class="material-symbols-outlined"> add </span>
                     <p class="ml-1">Tambah Produk</p>
                   </a>                  
-                  @endif
-                  @endauth
+                  @endcan
               </div>
               </div>
               <div class="w-full grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-10">
                @forelse ($medicines as $medicine)
                <a href="/katalog/{{$medicine['slug']}}" class="flex flex-col max-h-75 overflow-hidden rounded-lg shadow-md w-full sm:aspect-square hover:bg-peach hover:border-1 group border-orange hover:shadow-lg cursor-pointer transition-all duration-200">
                     <img
-                        src="img/catalogue/{{$medicine->image}}.jpg"
+                        src="{{ asset('storage/' . $medicine->image) }}"
                         alt="{{$medicine->name}}"
                         class="w-full h-5/9 object-cover bg-center transition-all duration-300 ease-in-out transform origin-bottom group-hover:scale-110"
                     />

@@ -15,7 +15,13 @@ class Medicines extends Model
     /** @use HasFactory<\Database\Factories\MedicinesFactory> */
     use HasFactory, Sluggable;
 
-    protected $fillable = ['name','slug','price','stock', 'category_id'];
+    protected $fillable = ['name','slug','price','stock', 'category_id', 'image'];
+    protected $casts = [
+        'price' => 'integer',
+        'stock' => 'integer',
+    ];
+    protected $table = 'medicines';
+    protected $primaryKey = 'id';
     protected $with = ['category'];
 
     public function category() : BelongsTo {

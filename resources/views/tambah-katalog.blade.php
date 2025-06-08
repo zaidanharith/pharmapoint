@@ -15,6 +15,9 @@
                   <div class="flex flex-col mt-5 w-1/3">
                     <label for="name" class="font-medium after:content-['*'] after:text-red after:ml-1">Nama Produk</label>
                     <input type="text" name="name" id="name" placeholder="Paracetamol" value="{{ old('name') }}" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
+                    @error('name')
+                        <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
+                    @enderror
                   </div>
                   <div class="flex flex-col mt-5 w-1/3">
                     <label for="name" class="font-medium after:content-['*'] after:text-red after:ml-1">Kategori</label>
@@ -27,6 +30,9 @@
                         @endif
                       @endforeach
                     </select>
+                    @error('category_id')
+                        <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
+                    @enderror
                   </div>
                   <div class="flex mt-5 w-1/3 items-center">
                     <div class="flex flex-col gap--5">
@@ -35,10 +41,16 @@
                         <span class="text-md font-bold text-blue-dark mr-2 ">Rp</span>
                         <input type="text" name="price" id="price" placeholder="10000" value="{{ old('price') }}" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
                       </div>
+                      @error('price')
+                        <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
+                      @enderror
                     </div>
                     <div class="flex flex-col w-1/3 ml-5">
                       <label for="stock" class="font-medium after:content-['*'] after:text-red after:ml-1">Jumlah Stok</label>
                       <input type="number" name="stock" id="stock" placeholder="50" value="{{ old('stock') }}" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
+                      @error('stock')
+                        <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
+                      @enderror
                     </div>
                   </div>
                   <div class="flex flex-col mt-5 w-1/3">
@@ -48,10 +60,16 @@
                         <span class="material-symbols-outlined text-sm">add</span> 
                         Tambah Deskripsi
                     </button>
+                    @error('description')
+                        <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="flex flex-col mt-5 w-1/3">
                   <label for="image" class="font-medium">Gambar Produk</label>
                   <input type="file" name="image" id="image" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange cursor-pointer" >
+                  @error('image')
+                    <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
+                  @enderror
                 </div>
                 </div>
                 <button type="submit" class="px-4 py-2 bg-orange font-medium rounded-lg mt-5 flex items-center cursor-pointer hover:bg-orange/90"><span class="material-symbols-outlined mr-1"> add </span>Tambah Produk</button>

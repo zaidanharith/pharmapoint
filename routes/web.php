@@ -7,6 +7,7 @@ use App\Models\MedicineDescription;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MedicinesController;
@@ -23,13 +24,9 @@ Route::get('/katalog', function () {
     ]); 
 });
 
-Route::get('/katalog/tambah', function () {
-    return view('tambah-katalog',[
-        'title'=>'Tambah Katalog', 'categories' => Category::all()
-    ]); 
-})->middleware('auth'); 
+Route::get('/katalog/tambah', [MedicinesController::class, 'index']);
 
-Route::post('/katalog/tambah', [MedicinesController::class, 'store'])->middleware('auth');
+Route::post('/katalog/tambah', [MedicinesController::class, 'store']);
 
 Route::get('/katalog/{medicine:slug}', function (Medicines $medicine) {
     return view('detail-katalog',[

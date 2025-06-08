@@ -2,19 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Medicines;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\MedicineDescription;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreMedicinesRequest;
 use App\Http\Requests\UpdateMedicinesRequest;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class MedicinesController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {   
+        $this->authorize('owner-admin');
+        return view('tambah-katalog',[
+            'title'=>'Tambah Katalog', 'categories' => Category::all()
+        ]); 
     }
 
     /**
@@ -28,14 +38,28 @@ class MedicinesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMedicinesRequest $request)
+    public function store(Request $request)
     {
+        $this->authorize('owner-admin');
 
-        dd($request->all());
+        $messages = [
+            'name.required' => 'Nama obat harus diisi.',
+            'category_id.required' => 'Kategori obat harus dipilih.',
+            'category_id.exists' => 'Kategori obat tidak valid.',
+            'price.required' => 'Harga obat harus diisi.',
+            'price.numeric' => 'Harga obat harus berupa angka.',
+            'price.min' => 'Harga obat tidak boleh kurang dari 0.',
+            'stock.required' => 'Stok obat harus diisi.',
+            'stock.integer' => 'Stok obat harus berupa angka bulat.',
+            'stock.min' => 'Stok obat tidak boleh kurang dari 0.',
+            'image.image' => 'File yang diunggah harus berupa gambar.',
+            'image.mimes' => 'Gambar harus berformat jpg, jpeg, atau png.',
+            'image.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.'
+        ];
+
         $validatedData = $request->validate(
             [
                 'name' => 'required|max:255',
-                'description' => 'nullable|string',
                 'category_id' => 'required|exists:categories,id',
                 'price' => 'required|numeric|min:0',
                 'stock' => 'required|integer|min:0',
@@ -43,15 +67,34 @@ class MedicinesController extends Controller
             ]
         );
         
+        $descriptions = $request->input('description');
+        if ($descriptions) {
+            $validatedData['description'] = $descriptions;
+        } else {
+            $validatedData['description'] = null;
+        }
         
+        unset($validatedData['description']);
+
         $validatedData['slug'] = Str::slug($validatedData['name']);
         
-        // Handle image upload  
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('medicine-images');
         }
 
         Medicines::create($validatedData);
+
+        if ($descriptions) {
+            foreach ($descriptions as $description) {
+                if (!empty($description)) {
+                    $validatedDescriptions[] = [
+                        'medicine_id' => Medicines::latest()->first()->id,
+                        'description' => $description
+                    ];
+                }
+            }
+            MedicineDescription::insert($validatedDescriptions);
+        }
 
         return redirect('/katalog')->with('success', "Produk {$validatedData['name']} berhasil ditambahkan ke katalog.");
     }

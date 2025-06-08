@@ -12,9 +12,9 @@ class DashboardController extends Controller
     {   
         return view('dashboard.index', [
             'title' => 'Dashboard', 'users' => User::all(),
-            'transactions' => Transaction::with(['user', 'medicine'])
-                ->orderBy('created_at', 'desc')
-                ->paginate(10)
+            // 'transactions' => Transaction::with(['user', 'medicine'])
+            //     ->orderBy('created_at', 'desc')
+            //     ->paginate(10)
         ]);
     }
 }

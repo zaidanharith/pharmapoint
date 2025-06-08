@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsOwner;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -50,6 +52,7 @@ class Kernel extends HttpKernel
         'auth' => Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => RedirectIfAuthenticated::class,
-        'admin' => AdminMiddleware::class,
+        'admin' => IsAdmin::class,
+        'owner' => IsOwner::class,
     ];
 }

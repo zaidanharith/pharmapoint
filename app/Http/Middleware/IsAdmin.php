@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class IsAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,14 +16,10 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check()) {
-            return redirect('/masuk')->with('loginError', 'Silakan login terlebih dahulu.');
+        if (Auth::guest() && !Auth::user()->is_admin) {
+            abort(403);
         }
-
-        if (!Auth::user()->is_admin) {
-            return redirect('/masuk')->with('loginError', 'Anda tidak memiliki akses ke halaman ini.');
-        }
-
+        
         return $next($request);
     }
 }
