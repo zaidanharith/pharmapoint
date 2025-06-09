@@ -34,16 +34,21 @@
                          </div>
                          <div class="flex flex-col w-4/9">
                               <h2 class="font-extrabold text-2xl text-bg-dark mb-3 text-blue-dark">{{$medicine->name}}</h2>
-                              <h3 class="font-bold text-sm mb-5">Kategori: {{$medicine->category->name}}</h3>
+                              <h3 class="font-bold text-sm mb-3">Kategori: {{$medicine->category->name}}</h3>
                               @foreach ($medicine_description as $description)
-                                   <p>{{ $description->description }}</p>
+                                   <p class="border-b-1 border-gray-300 py-3">{{ $description->description }}</p>
                               @endforeach
                          </div>
                          <div class="flex flex-col w-2/9 rounded-lg shadow-md p-7 border-1 border-orange">
                               <h2 class="font-extrabold text-xl text-bg-dark mb-4 text-blue-dark">Pesan</h2>
                               <h3 class="">Ringkasan Pesanan</h3>
-                              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum nobis numquam possimus aspernatur ipsam placeat ut, est sequi doloremque natus officiis officia deleniti odio quisquam iste cum adipisci harum velit quibusdam voluptatibus. Eaque saepe cum, deserunt ipsa ut cupiditate omnis iusto eum facilis, alias corporis dolorem harum velit animi in.</p>
-                              <a href="#" class="font-bold text-md py-3 bg-orange hover:bg-orange/90 rounded-lg text-center mt-4">Beli</a>
+                              <div class="flex justify-between items-center font-bold mt-5">
+                                   <p>{{ $medicine->name }}</p>
+                                   <p>x2</p>
+                              </div>
+                              <a href="#" class="font-bold text-md py-3 bg-orange hover:bg-orange/90 rounded-lg text-center mt-4 flex items-center justify-center"><span class="material-symbols-outlined mr-2">
+                                   shopping_cart
+                                   </span>Beli</a>
                          </div>
                     </div>
                </div>

@@ -3,8 +3,10 @@
 use App\Models\Category;
 use App\Models\Medicines;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use App\Models\MedicineDescription;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
@@ -20,7 +22,9 @@ Route::get('/', function () {
 
 Route::get('/katalog', function () {
     return view('katalog',[
-        'title'=>'Katalog', 'medicines' => Medicines::filter()->orderBy('name')->paginate(16), 'categories' => Category::all() 
+        'title'=>'Katalog', 
+        'medicines' => Medicines::filter()->orderBy(DB::raw('LOWER(name)'))->paginate(16), 
+        'categories' => Category::all() 
     ]); 
 });
 
@@ -48,6 +52,21 @@ Route::get('/daftar', [ RegisterController::class,'index'])->middleware('guest')
 Route::post('/daftar', [ RegisterController::class,'create']);
 
 Route::get('/dashboard', [ DashboardController::class,'index'])->middleware('auth')->name('dashboard');
+
+Route::get('/dashboard/{user:username}', [UserController::class, 'index'])
+    ->middleware('auth');
+
+Route::put('/dashboard/{user:username}', [UserController::class, 'update'])
+    ->middleware('auth')
+    ->name('user.update');
+
+Route::post('/dashboard/{user}/approve', [DashboardController::class, 'approveAdmin'])
+    ->middleware('auth')
+    ->name('dashboard.approve');
+
+Route::post('/dashboard/{user}/requestAdmin', [DashboardController::class, 'requestAdmin'])
+    ->middleware('auth')
+    ->name('dashboard.requestAdmin');
 
 Route::post('/logout', [ LoginController::class,'logout']);
 

@@ -15,14 +15,12 @@
           <p
             class="text-peach text-base font-normal mb-8 md:mb-12 md:text-lg"
           >
+            Di
             <a href="#hero" class="font-bold text-xl text-orange"
               >PharmaPoint+</a
             >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure
-            accusamus corporis temporibus enim pariatur cumque cum, tempore
-            quisquam eveniet provident hic expedita aliquid aspernatur at
-            aperiam ex repellat facilis fugiat esse sed similique aut
-            voluptatum minus saepe!
+            , kami percaya bahwa menjaga kesehatan harusnya mudah dan cepat. Sebagai apotek digital terpercaya, kami menyediakan beragam obat dan kebutuhan kesehatan yang bisa kamu pesan langsung dari rumah, praktis, cepat, dan tanpa ribet. Kini, beli obat cukup lewat genggaman tangan. Bersama kami, mari wujudkan #SehatItuSimpel bagi semua orang!
+
           </p>
           <a
             href="/katalog"
@@ -50,16 +48,9 @@
       </h2>
       <div class="text-black mt-20">
         <p class="text-center">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Consequatur, officia natus nulla eos possimus, nam vel blanditiis
-          ratione quod, excepturi doloremque cumque officiis aut sapiente
-          temporibus facere! Corrupti autem odio dolor iste, adipisci
-          architecto minus nihil ipsam a officiis quaerat enim perferendis at
-          corporis dolore excepturi aliquam deserunt. Eum natus consectetur
-          assumenda omnis eius suscipit animi, commodi nemo tenetur distinctio
-          explicabo. Natus cumque aperiam illum hic error maxime ex vitae,
-          possimus doloremque eos facere magnam.
+          PharmaPoint+ adalah solusi apotek digital masa kini yang menghadirkan berbagai produk obat dan perlengkapan kesehatan secara online. Dengan desain modern dan antarmuka yang ramah pengguna, platform ini memudahkan siapa pun untuk mencari obat dengan cepat melalui fitur pencarian pintar, lalu langsung membelinya dalam hitungan menit tanpa perlu antre atau keluar rumah.
         </p>
+        <p class="text-center">Tak hanya itu, PharmaPoint+ juga dilengkapi sistem manajemen data cerdas untuk admin, memungkinkan pengelolaan stok dan informasi produk dilakukan dengan efisien dan terstruktur. Semua dirancang agar pengalaman belanja obat jadi semudah, secepat, dan seaman mungkin.</p>
       </div>
       <h3 class="font-extrabold text-3xl text-blue-dark my-15 text-center">
         Anggota Kelompok
@@ -149,11 +140,7 @@
 
       <div class="text-black mt-20">
         <p class="text-center">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil
-          molestiae quae animi, nemo recusandae quas consectetur rerum
-          reprehenderit inventore repudiandae sunt voluptatibus error ab.
-          Voluptatum, ab ad blanditiis dolorum dignissimos quibusdam sapiente
-          facilis dolor ex commodi eligendi est autem aspernatur qui.
+          Website PharmaPoint lahir dari kolaborasi tim kami yang memiliki semangat tinggi untuk menghadirkan solusi apotek digital yang modern dan relevan. Dengan semangat belajar dan kerja sama yang solid, tim kami berupaya menciptakan platform yang tidak hanya fungsional, tetapi juga bermanfaat bagi pengguna serta turut mendorong transformasi digital di bidang layanan kesehatan di Indonesia.
         </p>
       </div>
 

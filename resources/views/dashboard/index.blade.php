@@ -32,37 +32,109 @@
                 </div>
             </div>
 
+            <div class="flex justify-between items-center rounded-md shadow-md overflow-hidden px-4 md:px-5 py-3 mb-5">
+                <p class="font-bold text-md">Halo! Bagaimana kabarmu hari ini?</p>
+                <div class="flex flex-col items-end text-right">
+                    <div class="flex flex-col mb-3">
+                        <a href="/dashboard/{{ auth()->user()->username }}" class="py-1.5 px-3 rounded-md font-medium text-white bg-blue-dark text-sm cursor-pointer hover:bg-blue-dark/90 flex items-center"><span class="material-symbols-outlined mr-2">
+                            edit
+                            </span>Ubah Profil</a>
+                    </div>
+                    <div class="flex flex-col items-end text-right">
+                    @if(!auth()->user()->is_admin && !auth()->user()->request_admin && !auth()->user()->is_owner)
+                        <form action="{{ route('dashboard.requestAdmin', auth()->user()) }}" method="POST" class="flex items-center">
+                            @csrf
+                            <button type="submit" name="action" value="request" class="bg-green-600 text-white font-medium px-3 py-1.5 rounded-md hover:bg-green-700 text-sm cursor-pointer">
+                                Kirim Permintaan Menjadi Admin
+                            </button>
+                        </form>
+                    @elseif(auth()->user()->request_admin)
+                        <p class="font-medium text-sm text-green-600">Permintaan Anda untuk menjadi admin sedang diproses</p>
+                    @endif
+                    </div>
+                </div>
+            </div>
+
             @if (auth()->user()->is_admin)
-                <h1>Halo Admin</h1>
             @elseif (auth()->user()->is_owner)
-                <div class="flex flex-col mt-10 border-y-1 border-gray-300 overflow-hidden px-4 md:px-10 md:py-7">
-                    <h2 class="font-bold text-xl mb-2">Permintaan Upgrade Admin</h2>
+                <div class="flex flex-col mt-10 border-t-1 border-gray-300 overflow-hidden md:pt-7">
+                    <h2 class="font-bold text-lg text-blue-dark flex items-center"><span class="material-symbols-outlined mr-2">
+                        add_circle
+                        </span>Permintaan Upgrade Admin</h2>
                     <div class="flex flex-col mt-5 gap-y-3">
-                        @foreach ($users as $user)
-                            @if ($user->request_admin)
-                            <div class="flex justify-between items-center p-4 rounded-lg mb-3 shadow-sm">
-                                <div class="flex flex-col">
-                                    <h2 class="font-bold text-lg">{{ $user->name }}</h2>
-                                    <p class="text-gray-500 text-sm">{{ $user->email }}</p>
-                                </div class="flex justify-between items-center">
-                                {{-- jika tombol diklik, ubah is_admin jadi true --}}
-                                <form action="/dashboard" method="POST" class="flex items-center">
-                                    @csrf
-                                    <button type="submit" class="flex items-center rounded-md bg-green-500 font-medium px-3 py-1.5 cursor-pointer hover:bg-green-400 mr-3"><span class="material-symbols-outlined mr-1">check</span>Terima</button>
-                                    <button type="submit" class="flex items-center rounded-md bg-red-500 font-medium px-3 py-1.5 cursor-pointer hover:bg-red-400 text-white"><span class="material-symbols-outlined mr-1">close</span>Tolak</button>
-                                </form>
-                            </div>
-                            @endif
-                        @endforeach
+                        @if ($users->contains('request_admin', true))
+                            @foreach ($users as $user)
+                                @if ($user->request_admin)
+                                <div class="flex justify-between items-center px-4 py-2 rounded-lg mb-1 border-1 border-orange">
+                                    <div class="flex flex-col">
+                                        <h2 class="font-bold text-lg">{{ $user->name }}</h2>
+                                        <p class="text-gray-500 text-xs">{{ $user->updated_at->format('d M Y, H:i') }}</p>
+                                    </div class="flex justify-between items-center">
+                                    <form action="{{ route('dashboard.approve', $user->id) }}" method="POST" class="flex items-center">
+                                        @csrf
+                                        <button type="submit" name="action" value="approve" 
+                                            class="flex items-center rounded-md bg-green-500 font-medium px-3 py-1.5 cursor-pointer hover:bg-green-400 mr-3">
+                                            <span class="material-symbols-outlined mr-1">check</span>Terima
+                                        </button>
+                                        <button type="submit" name="action" value="reject" 
+                                            class="flex items-center rounded-md bg-red-500 font-medium px-3 py-1.5 cursor-pointer hover:bg-red-400 text-white">
+                                            <span class="material-symbols-outlined mr-1">close</span>Tolak
+                                        </button>
+                                    </form>
+                                </div>
+                                @endif
+                            @endforeach
+                            
+                        @else
+                            <p class="text-gray-500">Tidak ada permintaan upgrade admin saat ini.</p>
+                        @endif
                     </div>
                 </div>
             @else
-                <div class="flex flex-col rounded-md shadow-md overflow-hidden px-4 md:px-10 py-7 md:py-10">
-                    <h2 class="font-bold text-lg">Informasi Akun</h2>
-                    <p class="text-gray-500 text-sm">Email: {{ auth()->user()->email }}</p>
-                    <p class="text-gray-500 text-sm">Dibuat pada: {{ auth()->user()->created_at->format('d M Y') }}</p>
+                <div>
+                    
                 </div>
             @endif
+            
+            @can('owner-admin')
+            <div class="flex flex-col mt-10 border-t-1 border-gray-300 overflow-hidden md:pt-7">
+                <h2 class="font-bold text-lg text-blue-dark flex items-center"><span class="material-symbols-outlined mr-2">
+                    info
+                    </span>Informasi Katalog</h2>
+                <div class="mt-5">
+                    <h3 class="font-bold mb-3 text-red">Stok akan segera habis!</h3>
+                    @foreach ($medicines->sortBy('stock') as $medicine)
+                        @if ($medicine->stock <= 10 && $medicine->stock > 0)
+                            <a href="/katalog/{{ $medicine->slug }}" class="flex justify-between items-center px-3 py-1.5 rounded-lg mb-3 border-1 border-orange cursor-pointer hover:bg-orange/10 transition-all duration-200">
+                                <div class="flex items-center justify-between w-full">
+                                    <div class="flex items-center">
+                                        <h2 class="font-bold text-red">{{ $medicine->name }}</h2>
+                                        <p class="text-gray-500 text-xs ml-3">{{ $medicine->category->name }}</p>
+                                    </div>
+                                    <p class="text-red font-bold">Stok Tersedia: {{ $medicine->stock }}</p>   
+                                </div>
+                            </a>
+                        @endif
+                    @endforeach
+                </div>
+                <div class="mt-5">
+                    <h3 class="font-bold mb-3">Barang yang masuk dalam 24 jam terakhir</h3>
+                    @foreach ($medicines as $medicine)
+                        @if ($medicine->created_at >= now()->subDay())
+                            <a href="/katalog/{{ $medicine->slug }}" class="flex justify-between items-center px-3 py-1.5 rounded-lg mb-3 border-1 border-orange cursor-pointer hover:bg-orange/10 transition-all duration-200">
+                                <div class="flex items-center justify-between w-full">
+                                    <div class="flex items-center">
+                                        <h2 class="font-bold">{{ $medicine->name }}</h2>
+                                        <p class="text-gray-500 text-xs ml-3">{{ $medicine->category->name }}</p>
+                                    </div>
+                                    <p class="text-gray-500 text-sm font-medium">{{ $medicine->created_at->diffForHumans() }}</p>   
+                                </div>
+                            </a>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+            @endcan
 
         </div>
     </section>

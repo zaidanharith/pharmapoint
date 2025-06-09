@@ -1,68 +1,67 @@
 <x-layout>
-     <x-slot:title>{{ $title }}</x-slot:title>
+  <x-slot:title>{{ $title }}</x-slot:title>
 
-     <section id="catalogue" class="py-30 text-black">
-          <div class="container mx-auto px-4">
-            <h1 class="font-extrabold text-4xl text-blue-dark mb-10 text-center md:text-left">
-              Ubah Katalog - {{ $medicine->name }}
-            </h1>
-            <div class="flex flex-col rounded-md shadow-md overflow-hidden px-4 md:px-10 py-7 md:py-10">
-              <a href="/katalog/{{ $medicine->slug }}" class="flex items-center hover:font-bold group transition-all duration-200"><span class="material-symbols-outlined mr-1 group-hover:-translate-x-3 transition-all duration-200 ease-in-out">arrow_back</span>Kembali ke Detail</a>
-              <h2 class="font-bold text-xl mt-10">Silakan Masukkan Perubahan!</h2>
-               <form action="/katalog/{{ $medicine->slug }}/ubah" method="POST" enctype="multipart/form-data">
-                <div class="flex flex-col">
-                  @method('PATCH') 
-                  @csrf
-                  <div class="flex flex-col mt-5 w-1/3">
-                    <label for="name" class="font-medium after:content-['*'] after:text-red after:ml-1">Nama Produk</label>
-                    <input type="text" name="name" id="name" placeholder="Paracetamol" value="{{ old('name', $medicine->name) }}" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
-                    @error('name')
-                        <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
-                    @enderror
-                  </div>
-                  <div class="flex flex-col mt-5 w-1/3">
-                    <label for="name" class="font-medium after:content-['*'] after:text-red after:ml-1">Kategori</label>
-                    <select name="category_id" id="category_id" class="outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange cursor-pointer" required>
-                      @foreach ($categories as $category)
-                        @if(old('category_id', $medicine->category_id) == $category->id)
-                          <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
-                        @else
-                          <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endif
-                      @endforeach
-                    </select>
-                    @error('category_id')
-                      <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
-                     @enderror
-                  </div>
-                  <div class="flex mt-5 w-1/3 items-center">
-                    <div class="flex flex-col gap--5">
-                      <label for="name" class="font-medium after:content-['*'] after:text-red after:ml-1">Harga</label>
-                      <div class="flex items-center">
-                        <span class="text-md font-bold text-blue-dark mr-2 ">Rp</span>
-                        <input type="text" name="price" id="price" placeholder="10000" value="{{ old('price', $medicine->price) }}" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
-                      </div>
-                      @error('price')
-                        <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
-                      @enderror
-                    </div>
-                    <div class="flex flex-col w-1/3 ml-5">
-                      <label for="stock" class="font-medium after:content-['*'] after:text-red after:ml-1">Jumlah Stok</label>
-                      <input type="number" name="stock" id="stock" placeholder="50" value="{{ old('stock', $medicine->stock) }}" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
-                      @error('stock')
-                        <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
-                      @enderror
-                    </div>
-                  </div>
-                  <div class="flex flex-col mt-5 w-1/3">
-                    <label for="description" class="font-medium after:content-['*'] after:text-red after:ml-1 mb-2">Deskripsi</label>
-                    <div id="description-container">
-                        @foreach($medicine_description as $description)
+  <section id="catalogue" class="py-30 text-black">
+       <div class="container mx-auto px-4">
+         <h1 class="font-extrabold text-4xl text-blue-dark mb-10 text-center md:text-left">
+           Ubah Produk
+         </h1>
+         <div class="flex flex-col rounded-md shadow-md overflow-hidden px-4 md:px-10 py-7 md:py-10">
+           <a href="/katalog" class="flex items-center hover:font-bold group transition-all duration-200"><span class="material-symbols-outlined mr-1 group-hover:-translate-x-3 transition-all duration-200 ease-in-out">arrow_back</span>Kembali ke Katalog</a>
+           <h2 class="font-bold text-xl mt-10">Ubah Data Produk</h2>
+           <form action="/katalog/{{ $medicine->slug }}/ubah" method="POST" enctype="multipart/form-data" class="flex w-full">
+             @method('PATCH')
+             <div class="flex flex-col w-1/3">
+               @csrf
+               <div class="flex flex-col mt-5">
+                 <label for="name" class="font-medium after:content-['*'] after:text-red after:ml-1">Nama Produk</label>
+                 <input type="text" name="name" id="name" placeholder="Paracetamol" value="{{ old('name', $medicine->name) }}" class="outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
+                 @error('name')
+                     <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
+                 @enderror
+               </div>
+               <div class="flex flex-col mt-5">
+                 <label for="name" class="font-medium after:content-['*'] after:text-red after:ml-1">Kategori</label>
+                 <select name="category_id" id="category_id" class="outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange cursor-pointer" required>
+                   @foreach ($categories as $category)
+                     @if(old('category_id', $medicine->category_id) == $category->id)
+                       <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                     @else
+                       <option value="{{ $category->id }}">{{ $category->name }}</option>
+                     @endif
+                   @endforeach
+                 </select>
+                 @error('category_id')
+                     <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
+                 @enderror
+               </div>
+               <div class="flex mt-5 items-center">
+                 <div class="flex flex-col gap--5">
+                   <label for="name" class="font-medium after:content-['*'] after:text-red after:ml-1">Harga</label>
+                   <div class="flex items-center">
+                     <span class="text-md font-bold text-blue-dark mr-2 ">Rp</span>
+                     <input type="text" name="price" id="price" placeholder="10000" value="{{ old('price', $medicine->price) }}" class="outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
+                   </div>
+                   @error('price')
+                     <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
+                   @enderror
+                 </div>
+                 <div class="flex flex-col ml-5">
+                   <label for="stock" class="font-medium after:content-['*'] after:text-red after:ml-1">Jumlah Stok</label>
+                   <input type="number" name="stock" id="stock" placeholder="50" value="{{ old('stock', $medicine->stock) }}" class="outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange" required>
+                   @error('stock')
+                     <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
+                   @enderror
+                 </div>
+               </div>
+               <div class="flex flex-col mt-5">
+                <label for="description" class="font-medium after:content-['*'] after:text-red after:ml-1 mb-2">Deskripsi</label>
+                <div id="description-container">
+                    @foreach($medicine_description as $description)
                         <div class="description-input mb-3 flex items-center gap-2">
                             <input type="text" 
                                 name="description[]" 
-                                placeholder="Deskripsi produk" 
-                                value="{{ $description->description }}"
+                                value="{{ $description->description }}" 
                                 class="outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange w-full" 
                                 required
                             >
@@ -70,66 +69,114 @@
                                 <span class="material-symbols-outlined">close</span>
                             </button>
                         </div>
-                        @endforeach
-                    </div>
-                    <button type="button" class="px-3 py-1 bg-gray-200 rounded-md text-sm hover:bg-gray-300 w-fit flex items-center cursor-pointer" id="add-description-btn">
-                        <span class="material-symbols-outlined text-sm">add</span> 
-                        Tambah Deskripsi
-                    </button>
-                    @error('description')
-                        <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
-                    @enderror
+                    @endforeach
                 </div>
-                <div class="flex flex-col mt-5 w-1/3">
-                  <label for="image" class="font-medium">Gambar Produk</label>
-                  <input type="file" name="image" id="image" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange cursor-pointer" >
-                  @error('image')
-                    <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
-                  @enderror
-                </div>
-                </div>
-                <button type="submit" class="px-4 py-2 bg-green-600 text-white font-medium rounded-lg mt-5 flex items-center cursor-pointer hover:bg-green-700"><span class="material-symbols-outlined mr-1"> edit </span>Ubah Produk</button>
-              </form>
+                <button type="button" 
+                    class="px-3 py-1 bg-gray-200 rounded-md text-sm hover:bg-gray-300 w-fit flex items-center cursor-pointer" 
+                    id="add-description-btn">
+                    <span class="material-symbols-outlined text-sm">add</span> 
+                    Tambah Deskripsi
+                </button>
+              </div>
+               <div class="flex flex-col mt-5">
+                 <label for="image" class="font-medium">Gambar Produk</label>
+                 <input type="hidden" name="oldImage" value="{{ $medicine->image }}">
+                 <input type="file" name="image" id="image" class="outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange cursor-pointer" onchange="previewImage()" accept="image/*">
+                 @error('image')
+                   <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
+                 @enderror
+               </div>
+               <button type="submit" class="px-4 py-2 bg-orange font-medium rounded-lg mt-5 flex items-center cursor-pointer hover:bg-orange/90 w-fit">
+                 <span class="material-symbols-outlined mr-1">save</span>Simpan Perubahan
+               </button>
+             </div>
+             <div class="img-preview-container flex-col w-1/2 mt-5 ml-12 {{ $medicine->image ? 'flex' : 'hidden' }}">
+               <h3 class="font-bold mb-3">Pratinjau Gambar</h3>
+               <div class="flex items-center">
+                   <img class="img-preview object-contain rounded-lg shadow-sm" src="{{ $medicine->image ? asset('storage/' . $medicine->image) : '' }}" alt="Preview">
+               </div>
             </div>
-          </div>
-        </section>
-
-        <script>
-          document.addEventListener('DOMContentLoaded', function() {
-              const addButton = document.getElementById("add-description-btn");
-              const container = document.getElementById("description-container");
-      
-              // Add event listeners to existing remove buttons
-              document.querySelectorAll('.remove-description').forEach(button => {
-                  button.addEventListener('click', function() {
-                      this.closest('.description-input').remove();
-                  });
-              });
-      
-              addButton.addEventListener("click", function () {
-                  const inputDiv = document.createElement("div");
-                  inputDiv.className = "description-input mb-3 flex items-center gap-2";
-      
-                  inputDiv.innerHTML = `
-                      <input type="text" 
-                          name="description[]" 
-                          placeholder="Deskripsi produk" 
-                          class="outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange w-full" 
-                          required
-                      >
-                      <button type="button" class="remove-description text-red-500 hover:text-red-700 cursor-pointer">
-                          <span class="material-symbols-outlined">close</span>
-                      </button>
-                  `;
-      
-                  container.appendChild(inputDiv);
-      
-                  const removeButton = inputDiv.querySelector(".remove-description");
-                  removeButton.addEventListener("click", function () {
-                      inputDiv.remove();
-                  });
-              });
-          });
-      </script>
+           </form>
+         </div>
+       </div>
+     </section>
      
+     <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const addButton = document.getElementById("add-description-btn");
+        const container = document.getElementById("description-container");
+
+        // Add event listeners to existing remove buttons
+        document.querySelectorAll('.remove-description').forEach(button => {
+            button.addEventListener('click', function() {
+                if (container.children.length > 1) {
+                    this.closest('.description-input').remove();
+                }
+            });
+        });
+
+        addButton.addEventListener("click", function () {
+            const inputDiv = document.createElement("div");
+            inputDiv.className = "description-input mb-3 flex items-center gap-2";
+
+            inputDiv.innerHTML = `
+                <input type="text" 
+                    name="description[]" 
+                    placeholder="Deskripsi produk" 
+                    class="outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange w-full" 
+                    required
+                >
+                <button type="button" class="remove-description text-red-500 hover:text-red-700 cursor-pointer">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            `;
+
+            container.appendChild(inputDiv);
+
+            const removeButton = inputDiv.querySelector(".remove-description");
+            removeButton.addEventListener("click", function () {
+                if (container.children.length > 1) {
+                    inputDiv.remove();
+                }
+            });
+        });
+    });
+
+    function previewImage() {
+      const image = document.querySelector("#image");
+      const imgPreview = document.querySelector(".img-preview");
+      const imgPreviewContainer = document.querySelector(".img-preview-container");
+
+      if (!image.files || !image.files[0]) {
+        imgPreviewContainer.classList.add("hidden");
+        imgPreviewContainer.classList.remove("flex");
+        return;
+      }
+
+      imgPreviewContainer.classList.add("flex");
+      imgPreviewContainer.classList.remove("hidden");
+      
+      const file = image.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        imgPreview.src = e.target.result;
+        
+        const img = new Image();
+        img.src = e.target.result;
+        
+        img.onload = function() {
+          imgPreview.style.width = 'auto';
+          imgPreview.style.height = 'auto';
+          imgPreview.style.maxWidth = '100%';
+          const formContainer = document.querySelector('form > div:first-child');
+          const formHeight = formContainer.offsetHeight;
+          imgPreview.style.maxHeight = `${formHeight}px`;
+        };
+      };
+
+      reader.readAsDataURL(file);
+    }
+    </script>
+  
 </x-layout>

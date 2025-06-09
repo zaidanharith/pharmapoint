@@ -54,8 +54,19 @@ class MedicinesController extends Controller
             'stock.min' => 'Stok obat tidak boleh kurang dari 0.',
             'image.image' => 'File yang diunggah harus berupa gambar.',
             'image.mimes' => 'Gambar harus berformat jpg, jpeg, atau png.',
-            'image.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.'
+            'image.max' => 'Ukuran gambar tidak boleh lebih dari 10MB.'
         ];
+
+        $validatedData = $request->validate(
+            [
+            'name' => 'required|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:10240'
+            ],
+            $messages
+        );
 
         $validatedData = $request->validate(
             [
@@ -63,7 +74,7 @@ class MedicinesController extends Controller
                 'category_id' => 'required|exists:categories,id',
                 'price' => 'required|numeric|min:0',
                 'stock' => 'required|integer|min:0',
-                'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+                'image' => 'nullable|image|mimes:jpg,jpeg,png|max:10240'
             ]
         );
         
@@ -80,7 +91,10 @@ class MedicinesController extends Controller
         
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('medicine-images');
+        } else {
+            $validatedData['image'] = 'medicine-images/default.jpg';
         }
+        
 
         Medicines::create($validatedData);
 
@@ -144,15 +158,16 @@ class MedicinesController extends Controller
             'stock.min' => 'Stok obat tidak boleh kurang dari 0.',
             'image.image' => 'File yang diunggah harus berupa gambar.',
             'image.mimes' => 'Gambar harus berformat jpg, jpeg, atau png.',
-            'image.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.'
+            'image.max' => 'Ukuran gambar tidak boleh lebih dari 10MB.'
         ];
+
         $validatedData = $request->validate(
             [
                 'name' => 'required|max:255',
                 'category_id' => 'required|exists:categories,id',
                 'price' => 'required|numeric|min:0',
                 'stock' => 'required|integer|min:0',
-                'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+                'image' => 'nullable|image|mimes:jpg,jpeg,png|max:10240'
             ],
             $messages
         );

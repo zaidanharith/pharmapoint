@@ -66,17 +66,19 @@
                   </div>
                   <div class="flex flex-col mt-5">
                     <label for="image" class="font-medium">Gambar Produk</label>
-                    <input type="file" name="image" id="image" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange cursor-pointer" onchange="previewImage(event)">
+                    <input type="file" name="image" id="image" class=" outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange cursor-pointer" onchange="previewImage()" accept="image/*">
                     @error('image')
                       <p class="text-red text-sm mt-1 font-bold">{{ $message }}</p>
                     @enderror
                   </div>
                   <button type="submit" class="px-4 py-2 bg-orange font-medium rounded-lg mt-5 flex items-center cursor-pointer hover:bg-orange/90 w-fit"><span class="material-symbols-outlined mr-1"> add </span>Tambah Produk</button>
                 </div>
-                <div class="flex flex-col w-1/2 mt-5 ml-10">
-                  <h3 class="font-bold">Pratinjau Gambar</h3>
-                  <img src="{{asset('storage/' . $medicine->image)}}" alt="">
-                </div>
+                <div class="img-preview-container flex-col w-1/2 mt-5 ml-12 hidden">
+                  <h3 class="font-bold mb-3">Pratinjau Gambar</h3>
+                  <div class="flex items-center">
+                      <img class="img-preview object-contain rounded-lg shadow-sm" alt="Preview">
+                  </div>
+              </div>
               </form>
             </div>
           </div>
@@ -87,24 +89,57 @@
           const container = document.getElementById("description-container");
 
           addButton.addEventListener("click", function () {
-              const inputDiv = document.createElement("div");
-              inputDiv.className = "description-input mb-3 flex items-center gap-2";
+            const inputDiv = document.createElement("div");
+            inputDiv.className = "description-input mb-3 flex items-center gap-2";
 
-              inputDiv.innerHTML = `
-                          <input type="text" name="description[]" placeholder="Deskripsi produk" 
-                              class="outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange w-full" required>
-                          <button type="button" class="remove-description text-red-500 hover:text-red-700 cursor-pointer">
-                              <span class="material-symbols-outlined">close</span>
-                          </button>
-                      `;
+            inputDiv.innerHTML = `
+                              <input type="text" name="description[]" placeholder="Deskripsi produk" 
+                                class="outline-none mt-1 py-1 border-b-1 text-sm focus:border-b-2 focus:border-orange w-full" required>
+                              <button type="button" class="remove-description text-red-500 hover:text-red-700 cursor-pointer">
+                                <span class="material-symbols-outlined">close</span>
+                              </button>
+                            `;
 
-              container.appendChild(inputDiv);
+            container.appendChild(inputDiv);
 
-              const removeButton = inputDiv.querySelector(".remove-description");
-              removeButton.addEventListener("click", function () {
-                  inputDiv.remove();
-              });
+            const removeButton = inputDiv.querySelector(".remove-description");
+            removeButton.addEventListener("click", function () {
+                inputDiv.remove();
+            });
           });
+
+          function previewImage() {
+          const image = document.querySelector("#image");
+          const imgPreview = document.querySelector(".img-preview");
+          const imgPreviewContainer = document.querySelector(".img-preview-container");
+
+          imgPreviewContainer.classList.add("flex");
+          imgPreviewContainer.classList.remove("hidden");
+          
+          const file = image.files[0];
+          const reader = new FileReader();
+
+          reader.onload = function(e) {
+              const img = new Image();
+              img.src = e.target.result;
+              
+              img.onload = function() {
+                  const naturalWidth = this.naturalWidth;
+                  const naturalHeight = this.naturalHeight;
+                  
+                  imgPreview.style.width = 'auto';
+                  imgPreview.style.height = 'auto';
+                  imgPreview.style.maxWidth = '100%';
+                    const formContainer = document.querySelector('form > div:first-child');
+                    const formHeight = formContainer.offsetHeight;
+                    imgPreview.style.maxHeight = `${formHeight}px`;
+                  
+                  imgPreview.src = e.target.result;
+              };
+          };
+
+          reader.readAsDataURL(file);
+      }
         </script>
      
 </x-layout>
