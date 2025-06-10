@@ -45,7 +45,7 @@
                 type="submit"
                 class="px-4 py-5 hover:text-orange md:ml-7 md:bg-orange md:py-1 md:px-3 md:rounded-md md:text-black md:font-bold md:hover:text-black md:hover:bg-orange/90 cursor-pointer"
                 >Keluar</button>
-          </form>
+            </form>
             @else
             <a
               href="/masuk"
@@ -58,6 +58,13 @@
               >Daftar</a
             >
             @endauth
+            <a
+              href="/dashboard/keranjang"
+              class="px-4 py-5 hover:scale-105 md:p-0 md:ml-7 md:font-bold text-orange"
+              ><span class="material-symbols-outlined">
+                shopping_cart
+                </span></a
+            >
           </div>
         </div>
 

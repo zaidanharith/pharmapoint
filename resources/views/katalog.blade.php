@@ -45,9 +45,13 @@
                     <p>Urutkan</p>
                   </div>
                   @can('owner-admin')
-                  <a href="/katalog/tambah" class="flex items-center px-4 py-2 rounded-lg bg-blue-dark ml-5 hover:bg-blue-dark/90 text-white cursor-pointer transition-all duration-200">
+                  <a href="/katalog/tambah" class="flex items-center px-3 py-1.5 rounded-md bg-blue-dark ml-5 hover:bg-blue-dark/90 text-white text-sm cursor-pointer transition-all duration-200">
                     <span class="material-symbols-outlined"> add </span>
                     <p class="ml-1">Tambah Produk</p>
+                  </a>                  
+                  <a href="/katalog/kategori" class="flex items-center px-3 py-1.5 rounded-md bg-blue-dark ml-3 hover:bg-blue-dark/90 text-white text-sm cursor-pointer transition-all duration-200">
+                    <span class="material-symbols-outlined"> category </span>
+                    <p class="ml-1">Edit Kategori</p>
                   </a>                  
                   @endcan
               </div>
@@ -65,7 +69,7 @@
                         <h2 class="font-bold text-md">{{Str::limit($medicine->name,10)}}</h2>
                         <p class="font-medium text-sm">{{$medicine->category->name}}</p>
                       </div>
-                      <h3 class="font-extrabold text-xl text-blue-dark mt-1 mb-3">Rp. {{$medicine->price}}</h3>
+                      <h3 class="font-extrabold text-xl text-blue-dark mt-1 mb-3">Rp{{number_format($medicine->price, 0, ',', '.')}}</h3>
                       <h4 class="flex items-center">
                           <p class="font-bold text-sm text-green">Stok: <span>{{$medicine->stock}}</span></p>
                       </h4>
@@ -73,8 +77,7 @@
                 </a>  
                 @empty
                 <div class="flex flex-col">
-                  <p class="font-bold text-lg mb-3">Produk tidak ditemukan!</p> 
-                  <a href="/katalog" class="flex items-center hover:font-bold group transition-all duration-200"><span class="material-symbols-outlined mr-1 group-hover:-translate-x-3 transition-all duration-200 ease-in-out">arrow_back</span>Lihat semua katalog</a>
+                  <p class="font-bold text-lg">Produk tidak ditemukan!</p>
               </div>            
                @endforelse
               </div>

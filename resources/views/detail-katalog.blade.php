@@ -8,7 +8,7 @@
                <div class="flex flex-col rounded-md shadow-md overflow-hidden px-4 md:px-10 py-7 md:py-10">
                     <a href="/katalog" class="flex items-center hover:font-bold group transition-all duration-200"><span class="material-symbols-outlined mr-1 group-hover:-translate-x-3 transition-all duration-200 ease-in-out">arrow_back</span>Kembali ke Katalog</a>
                     <div class="flex gap-15 mt-10 items-start">
-                         <div class="flex flex-col w-3/9">
+                         <div class="flex flex-col w-3/10">
                               <div class="shadow-md overflow-hidden rounded-lg w-full">
                                    <img src="{{ asset('storage/' . $medicine->image) }}" alt="{{ $medicine['name'] }}" class="object-cover w-full">
                               </div>
@@ -32,24 +32,47 @@
                               </form>
                               @endcan
                          </div>
-                         <div class="flex flex-col w-4/9">
-                              <h2 class="font-extrabold text-2xl text-bg-dark mb-3 text-blue-dark">{{$medicine->name}}</h2>
-                              <h3 class="font-bold text-sm mb-3">Kategori: {{$medicine->category->name}}</h3>
-                              @foreach ($medicine_description as $description)
-                                   <p class="border-b-1 border-gray-300 py-3">{{ $description->description }}</p>
-                              @endforeach
-                         </div>
-                         <div class="flex flex-col w-2/9 rounded-lg shadow-md p-7 border-1 border-orange">
-                              <h2 class="font-extrabold text-xl text-bg-dark mb-4 text-blue-dark">Pesan</h2>
-                              <h3 class="">Ringkasan Pesanan</h3>
-                              <div class="flex justify-between items-center font-bold mt-5">
-                                   <p>{{ $medicine->name }}</p>
-                                   <p>x2</p>
+                         <div class="flex flex-col w-4/10">
+                              <div class="flex justify-between items-center mb-7">
+                                   <div class="flex flex-col">
+                                        <h2 class="font-extrabold text-2xl text-bg-dark mb-2 text-blue-dark">{{$medicine->name}}</h2>
+                                        <h3 class="font-bold text-sm">Kategori: {{$medicine->category->name}}</h3>
+                                   </div>
+                                   <h2 class="text-3xl font-extrabold">Rp{{ number_format($medicine->price, 0, ',', '.') }}</h2>
                               </div>
-                              <a href="#" class="font-bold text-md py-3 bg-orange hover:bg-orange/90 rounded-lg text-center mt-4 flex items-center justify-center"><span class="material-symbols-outlined mr-2">
-                                   shopping_cart
-                                   </span>Beli</a>
+                              <div class="flex flex-col border-1 border-gray-300 rounded-md overflow-hidden">
+                                @foreach ($medicine_description as $description)
+                                      <p class="p-4 {{ !$description->last ? 'border-b-1 border-gray-300' : '' }}">{{ $description->description }}</p>
+                              @endforeach
+                              </div>
                          </div>
+                         <form action="/katalog/{{ $medicine->slug }}/keranjang" method="POST" class="flex flex-col w-3/10 rounded-lg shadow-md py-7 px-5 border-1 border-orange">
+                              @csrf
+                              @method('post')
+                              <h2 class="font-extrabold text-xl text-bg-dark mb-4 text-blue-dark">Pesan</h2>
+                              <div class="flex justify-between items-center font-bold w-full">
+                                   <div class="flex flex-col">
+                                        <h5 class="text-lg">{{ $medicine->name }}</h5>
+                                        <p class="text-sm text-gray-500">Rp{{ number_format($medicine->price, 0, ',', '.') }}</p>
+                                   </div>
+                                   <div class="flex items-center gap-2">
+                                        <input type="number" 
+                                            name="quantity" 
+                                            id="quantity" 
+                                            class="w-20 px-2 py-1 border-1 border-gray-300 rounded-md" 
+                                            value="1" 
+                                            min="1" 
+                                            onchange="updateTotal(this.value)"
+                                            required>
+                                    </div>
+                              </div>
+                              <p class="mt-5 font-extrabold text-xl text-blue-dark" id="total">
+                                   Total: Rp{{ number_format($medicine->price * old('quantity', 1), 0, ',', '.') }}
+                               </p>
+                              <button type="submit" class="font-bold text-md py-3 bg-orange hover:bg-orange/90 rounded-lg text-center mt-5 flex items-center justify-center cursor-pointer"><span class="material-symbols-outlined mr-2">
+                                   shopping_cart
+                                   </span>Masukkan Keranjang</button>
+                         </form>
                     </div>
                </div>
           </div>
@@ -73,6 +96,18 @@
 
           cancelDeleteKatalogBtn.addEventListener("click", function () {
           deleteKatalogForm.style.display = "none";
+          });
+
+          function updateTotal(quantity) {
+               const price = {{ $medicine->price }};
+               const total = price * quantity;
+               document.getElementById('total').textContent = 
+                    'Total: Rp' + new Intl.NumberFormat('id-ID').format(total);
+          }
+
+          document.addEventListener('DOMContentLoaded', function() {
+               const quantityInput = document.getElementById('quantity');
+               updateTotal(quantityInput.value);
           });
      </script>
 </x-layout>

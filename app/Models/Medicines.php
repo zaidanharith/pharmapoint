@@ -36,8 +36,26 @@ class Medicines extends Model
         return $this->hasMany(TransactionDetail::class);
     }
 
+
     public function scopeFilter(Builder $query) : void {
         $query->where('name','LIKE','%'.request('search').'%');
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+                'onUpdate' => true,
+                'separator' => '-',
+                'unique' => true,
+                'maxLength' => 50,
+            ],
+        ];
+    }
+
+    public function cart() : HasMany {
+        return $this->hasMany(Cart::class);
     }
 
 }

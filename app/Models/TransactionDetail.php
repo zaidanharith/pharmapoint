@@ -14,13 +14,13 @@ class TransactionDetail extends Model
     /** @use HasFactory<\Database\Factories\TransactionDetailFactory> */
     use HasFactory;
 
-    protected $fillable = ['transaction_id','medicine_id','medicine_quantity','subtotal'];
+    protected $fillable = ['transaction_id','medicine_id', 'medicine_quantity','subtotal',];
 
     public function transaction() : BelongsTo {
         return $this->belongsTo(Transaction::class);
     }
 
-    public function detail() : HasMany {
-        return $this->hasMany(Medicines::class);
+    public function cart() : BelongsTo {
+        return $this->belongsTo(Cart::class);
     }
 }

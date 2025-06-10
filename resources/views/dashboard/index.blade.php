@@ -55,6 +55,27 @@
                 </div>
             </div>
 
+            <div class="flex flex-col mt-10 border-t-1 border-gray-300 overflow-hidden md:pt-7">
+                <h2 class="font-bold text-lg text-blue-dark flex items-center"><span class="material-symbols-outlined mr-2">
+                    receipt_long
+                    </span>Histori Transaksi</h2>
+                <div class="flex flex-col mt-5 gap-y-3">
+                    @if ($transactions->count())
+                        @foreach ($transactions as $transaction)
+                            <div class="flex justify-between items-center rounded-lg border-1 border-gray-300 px-4 py-2 mb-1">
+                                <div class="flex flex-col">
+                                    <p class="font-bold text-lg text-green">Rp{{ number_format($transaction->grand_total, 0, ',', '.') }}</p>
+                                    <p class="text-sm font-medium text-gray-500">{{ $transaction->payment_method }}</p>
+                                </div>
+                                <p class="font-medium">{{ $transaction->created_at->format('d M Y, H:i:s') }}</p>
+                            </div>
+                        @endforeach
+                    @else
+                        <p class="text-gray-500">Belum ada transaksi.</p>
+                    @endif
+                </div>
+            </div>
+
             @if (auth()->user()->is_admin)
             @elseif (auth()->user()->is_owner)
                 <div class="flex flex-col mt-10 border-t-1 border-gray-300 overflow-hidden md:pt-7">
@@ -102,7 +123,9 @@
                     info
                     </span>Informasi Katalog</h2>
                 <div class="mt-5">
-                    <h3 class="font-bold mb-3 text-red">Stok akan segera habis!</h3>
+                    @if ($medicines->where('stock', '<=', 10)->where('stock', '>', 0)->count() > 0)
+                        <h3 class="font-bold mb-3 text-red">Stok akan segera habis!</h3>
+                    @endif
                     @foreach ($medicines->sortBy('stock') as $medicine)
                         @if ($medicine->stock <= 10 && $medicine->stock > 0)
                             <a href="/katalog/{{ $medicine->slug }}" class="flex justify-between items-center px-3 py-1.5 rounded-lg mb-3 border-1 border-orange cursor-pointer hover:bg-orange/10 transition-all duration-200">
