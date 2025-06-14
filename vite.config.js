@@ -12,7 +12,7 @@ export default defineConfig({
     ],
     build: {
         manifest: true,
-        outDir: "public/build",
+        outDir: "public/build/.vite",
         rollupOptions: {
             input: ["resources/css/app.css", "resources/js/app.js"],
         },
