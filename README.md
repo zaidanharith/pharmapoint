@@ -47,18 +47,17 @@ PharmaPoint+ is equipped with a range of powerful and user-centric features to e
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336699?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org)
 [![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)](https://www.heroku.com)
 
-### 🔹 Backend: Laravel
+-   **🖥️ Backend: Laravel**
 
-Laravel powers the backend by managing database migrations, models, controllers, and route definitions. Migrations handle version-controlled table structures, ensuring smooth schema evolution. Models serve as data representations and encapsulate business logic linked to database tables. Controllers process user requests, interact with models, and return appropriate views. Laravel’s routing system maps URLs to controllers, creating a clean, well-structured flow throughout the application.
+    Laravel powers the backend by managing database migrations, models, controllers, and route definitions. Migrations handle version-controlled table structures, ensuring smooth schema evolution. Models serve as data representations and encapsulate business logic linked to database tables. Controllers process user requests, interact with models, and return appropriate views. Laravel’s routing system maps URLs to controllers, creating a clean, well-structured flow throughout the application.
 
-### 🔹 Frontend: Tailwind CSS
+-   **🎨 Frontend: Tailwind CSS**
 
-The frontend leverages Blade, Laravel’s powerful templating engine, to build dynamic and organized views with clean syntax. Blade promotes separation of concerns, making UI development more maintainable and scalable. Tailwind CSS, a utility-first CSS framework, accelerates styling by enabling responsive, consistent layouts without writing custom CSS from scratch. The combination of Blade and Tailwind CSS provides high flexibility in building sleek, user-friendly interfaces.
+    The frontend leverages Blade, Laravel’s powerful templating engine, to build dynamic and organized views with clean syntax. Blade promotes separation of concerns, making UI development more maintainable and scalable. Tailwind CSS, a utility-first CSS framework, accelerates styling by enabling responsive, consistent layouts without writing custom CSS from scratch. The combination of Blade and Tailwind CSS provides high flexibility in building sleek, user-friendly interfaces.
 
-### 🔹 Database: Supabase (PostgreSQL)
+-   **🗄️ Database: Supabase (PostgreSQL)**
 
-Supabase is a backend-as-a-service platform offering a robust PostgreSQL database and other services such as authentication and real-time subscriptions. In this project, Supabase is used as the primary database solution due to its ease of integration, scalability, and secure architecture. PostgreSQL itself is a reliable, ACID-compliant relational database system capable of handling large datasets with high performance. Supabase simplifies database management, enabling rapid development with real-time updates, secure storage, and seamless authentication workflows.
+    Supabase is a backend-as-a-service platform offering a robust PostgreSQL database and other services such as authentication and real-time subscriptions. In this project, Supabase is used as the primary database solution due to its ease of integration, scalability, and secure architecture. PostgreSQL itself is a reliable, ACID-compliant relational database system capable of handling large datasets with high performance. Supabase simplifies database management, enabling rapid development with real-time updates, secure storage, and seamless authentication workflows.
 
-### 🔹 Deployment: Heroku
-
-Heroku is used to deploy and host the application in a cloud environment. It provides a simple, scalable, and developer-friendly platform-as-a-service (PaaS) that supports Laravel applications out of the box. With Heroku’s Git-based deployment and seamless integration with CI/CD workflows, developers can push changes quickly and maintain application uptime with minimal effort. Heroku also offers scalable dynos, add-ons, and monitoring t
+-   **☁️ Deployment: Heroku**  
+    Heroku is used as the cloud deployment platform for this application, offering a seamless and scalable environment to host Laravel-based projects. Its developer-friendly platform-as-a-service (PaaS) model enables fast Git-based deployments, making it ideal for rapid iteration and continuous integration workflows. With Heroku, developers can manage scaling through dynos, integrate various add-ons such as monitoring, databases, and caching, and enable automated SSL for secure access. Thanks to its simplicity and built-in support for Laravel, Heroku serves as a practical and efficient solution for deploying modern web applications like PharmaPoint+.
