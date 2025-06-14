@@ -7,17 +7,17 @@
       <div class="w-full flex flex-col mb-10 md:w-auto">
         <h2 class="font-bold mb-5 text-2xl">Anggota Kelompok</h2>
         <ul class="font-light">
-          <li class="mb-3">
-            <span class="font-bold">Anggita Salsabilla</span>
-            (23/512629/TK/56334)
-          </li>
-          <li class="mb-3">
-            <span class="font-bold">Chaira Nastya W.</span>
-            (23/512629/TK/56334)
-          </li>
-          <li class="mb-3">
-            <span class="font-bold">Zaidan Harith</span> (23/512629/TK/56334)
-          </li>
+          <a href="https://www.instagram.com/anggita.salsabilla/" class="mb-3 block">
+            <span class="font-bold mr-1">Anggita Salsabilla</span>
+            (23/516001/TK/56775)
+          </a>
+          <a href="https://www.instagram.com/chairanastya/" class="mb-3 block">
+            <span class="font-bold mr-1">Chaira Nastya W.</span>
+            (23/514942/TK/56550)
+          </a>
+          <a href="https://www.instagram.com/zaidanharith_/" class="mb-3 block">
+            <span class="font-bold mr-1">Zaidan Harith</span> (23/512629/TK/56334)
+          </a>
         </ul>
       </div>
       <div class="w-full flex flex-col md:w-auto md:ml-30">
@@ -32,7 +32,7 @@
       </div>
       <div class="w-full flex flex-col mt-15">
         <p class="font-light text-sm">
-          Copyright &#169; 2025 <span class="font-medium">ZACreative</span>.
+          Copyright &#169; 2025 <a href="/" class="font-medium mx-1">ZACreative</a>.
           All Rights Reserved
         </p>
       </div>
