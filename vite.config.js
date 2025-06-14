@@ -8,6 +8,12 @@ export default defineConfig({
         laravel({
             input: ["resources/css/app.css", "resources/js/app.js"],
             refresh: true,
-        })
+        }),
     ],
+    build: {
+        manifest: true,
+        rollupOptions: {
+            input: ["resources/css/app.css", "resources/js/app.js"],
+        },
+    },
 });
