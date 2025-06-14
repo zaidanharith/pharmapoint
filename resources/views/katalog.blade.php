@@ -19,42 +19,41 @@
             @endif
             <div class="flex flex-col rounded-md shadow-md overflow-hidden px-4 py-7 md:p-10">
               <div class="w-full flex justify-between">
-                <form class="flex">
-                  <label for="search" class="flex items-center"
-                    ><span class="material-symbols-outlined mr-1">
-                      search
-                    </span></label
-                  >
-                  <input
-                    type="text"
-                    name="search"
-                    id="search"
-                    placeholder="Cari..."
-                    autofocus autocomplete="off"
-                    class="outline-none hover:border-orange focus:border-b-2 focus:border-orange"
-                  />
-                </form>
                 <div class="flex items-center">
-                  <div class="flex cursor-pointer hover:font-medium hover:text-blue-navy mr-4">
-                    <span class="material-symbols-outlined"> filter_alt </span>
-                    <p>Kategori</p>
+                  <span class="material-symbols-outlined mr-1">search</span>
+                  <input
+                  type="text"
+                  name="search"
+                  id="search"
+                  placeholder="Cari..."
+                  autofocus autocomplete="off"
+                  class="w-32 md:w-48 lg:w-64 outline-none hover:border-orange focus:border-b-2 focus:border-orange"
+                  />
+                </div>
+                <div class="flex flex-row items-center gap-2 mt-4 md:mt-0">
+                  <div class="flex cursor-pointer hover:font-medium hover:text-blue-navy mr-2">
+                  <span class="material-symbols-outlined">filter_alt</span>
+                  <p class="hidden lg:block ml-1">Kategori</p>
                   </div>
                   
                   <div class="flex cursor-pointer hover:font-medium hover:text-blue-navy">
-                    <span class="material-symbols-outlined"> sort </span>
-                    <p>Urutkan</p>
+                  <span class="material-symbols-outlined">sort</span>
+                  <p class="hidden lg:block ml-1">Urutkan</p>
                   </div>
+
                   @can('owner-admin')
-                  <a href="/katalog/tambah" class="flex items-center px-3 py-1.5 rounded-md bg-blue-dark ml-5 hover:bg-blue-dark/90 text-white text-sm cursor-pointer transition-all duration-200">
-                    <span class="material-symbols-outlined"> add </span>
-                    <p class="ml-1">Tambah Produk</p>
-                  </a>                  
-                  <a href="/katalog/kategori" class="flex items-center px-3 py-1.5 rounded-md bg-blue-dark ml-3 hover:bg-blue-dark/90 text-white text-sm cursor-pointer transition-all duration-200">
-                    <span class="material-symbols-outlined"> category </span>
-                    <p class="ml-1">Edit Kategori</p>
-                  </a>                  
+                  <div class="flex flex-row gap-2 ml-4">
+                    <a href="/katalog/tambah" class="flex items-center px-2 py-1 rounded-md bg-blue-dark hover:bg-blue-dark/90 text-white text-sm cursor-pointer transition-all duration-200">
+                      <span class="material-symbols-outlined">add</span>
+                      <p class="hidden md:block ml-1">Tambah Produk</p>
+                    </a>                  
+                    <a href="/katalog/kategori" class="flex items-center px-2 py-1 rounded-md bg-blue-dark hover:bg-blue-dark/90 text-white text-sm cursor-pointer transition-all duration-200">
+                      <span class="material-symbols-outlined">category</span>
+                      <p class="hidden md:block ml-1">Edit Kategori</p>
+                    </a>
+                  </div>                  
                   @endcan
-              </div>
+                </div>
               </div>
               <div class="w-full grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-10">
                @forelse ($medicines as $medicine)

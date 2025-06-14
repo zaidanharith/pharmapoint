@@ -4,6 +4,17 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 
+:root {
+    --font-jakarta: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, sans-serif;
+}
+
+@layer base {
+    html {
+        font-family: var(--font-jakarta);
+    }
+}
+
 @theme {
     --color-red: #b62b03;
     --color-yellow: #fcdc1c;

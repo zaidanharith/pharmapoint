@@ -14,7 +14,7 @@
 
         <!-- Hamburger Menu (Mobile) -->
         <div
-          class="bg-blue-dark absolute hidden flex-col w-2/3 top-20 -right-2 text-peach rounded-bl-xl overflow-hidden border-1 border-blue-navy transition-all duration-300 z-[9999] md:flex md:static md:w-auto md:flex-3/4 md:border-none md:flex-row-reverse md:bg-transparent md:rounded-none"
+          class="bg-blue-dark absolute hidden flex-col w-full top-20 text-peach overflow-hidden border-1 border-blue-navy transition-all duration-300 z-[9999] md:flex md:static md:w-auto md:flex-3/4 md:border-none md:flex-row-reverse md:bg-transparent md:rounded-none"
           id="nav-menu"
         >
           <div
@@ -36,14 +36,14 @@
             @auth
             <a
               href="/dashboard"
-              class="px-4 py-5 hover:scale-105 md:p-0 md:ml-7 md:font-bold text-orange"
+              class="px-4 py-5 hover:scale-105 md:p-0 md:ml-7 md:font-bold text-white md:text-orange"
               >Dashboard</a
             >
             <form action="/logout" method="POST">
                 @csrf
               <button
                 type="submit"
-                class="px-4 py-5 hover:text-orange md:ml-7 md:bg-orange md:py-1 md:px-3 md:rounded-md md:text-black md:font-bold md:hover:text-black md:hover:bg-orange/90 cursor-pointer"
+                class="px-4 py-5 hover:text-orange md:ml-7 md:bg-orange md:py-1 md:px-3 md:rounded-md md:text-black font-bold text-orange md:hover:text-black md:hover:bg-orange/90 cursor-pointer"
                 >Keluar</button>
             </form>
             @else
