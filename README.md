@@ -1,61 +1,64 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PharmaPoint+ : A Modern Web-Based Digital Pharmacy Solution
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**PharmaPoint+** is a digital pharmacy web application designed to help users seamlessly search, select, and purchase medicines online. This project is built with **Laravel** as the backend framework, **Supabase** (PostgreSQL) as the database solution, and **Tailwind CSS** to ensure a responsive and modern user interface. The application is deployed on **Heroku**, a cloud platform that provides scalable hosting and easy deployment workflows for modern web applications.
 
-## About Laravel
+## 👥 Contributors
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   [Anggita Salsabilla](https://www.instagram.com/anggita.salsabilla/) – 23/516001/TK/56775
+-   [Chaira Nastya Warestri](https://www.instagram.com/chairanastya/) – 23/514942/TK/56550
+-   [Zaidan Harith](https://www.instagram.com/zaidanharith_/) – 23/512629/TK/56334
 
--   [Simple, fast routing engine](https://laravel.com/docs/routing).
--   [Powerful dependency injection container](https://laravel.com/docs/container).
--   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
--   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
--   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
--   [Robust background job processing](https://laravel.com/docs/queues).
--   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Key Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+PharmaPoint+ is equipped with a range of powerful and user-centric features to ensure a seamless and secure online pharmacy experience:
 
-## Learning Laravel
+-   **🔐 User Registration & Authentication**  
+    Secure user sign-up and login system with role-based access control.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-   **📊 Role-Based Dashboards**  
+    Dynamic dashboard interfaces that adapt based on the user's role — user, admin, or owner — providing relevant data and controls.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   **💊 Medicine Management (CRUD)**  
+    Admins and owners can add, update, delete, and manage complete medicine data easily through an intuitive backend interface.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   **🔎 Medicine Catalog with Smart Search**  
+    A fully searchable and filterable catalog that allows users to explore medicines by name or category.
 
-## Laravel Sponsors
+-   **🧾 Product Details & Online Ordering**  
+    Users can view detailed product information and place orders directly through the platform.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+-   **📂 Transaction History & Order Tracking**  
+    Comprehensive transaction records and order status tracking for users and admins.
 
-### Premium Partners
+-   **🏷️ Category System**  
+    Medicines are organized into categories to enhance browsing and filtering experience.
 
--   **[Vehikl](https://vehikl.com)**
--   **[Tighten Co.](https://tighten.co)**
--   **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
--   **[64 Robots](https://64robots.com)**
--   **[Curotec](https://www.curotec.com/services/technologies/laravel)**
--   **[DevSquad](https://devsquad.com/hire-laravel-developers)**
--   **[Redberry](https://redberry.international/laravel-development)**
--   **[Active Logic](https://activelogic.com)**
+-   **✅ Data Validation & Security**  
+    All inputs are validated to ensure data integrity and prevent malicious entries, ensuring a secure environment for all users.
 
-## Contributing
+-   **🔄 Role Upgrade Management**  
+    Owners can promote standard users to admin level, supporting flexible and scalable team management.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🛠️ Tech Stack
 
-## Code of Conduct
+[![Laravel](https://img.shields.io/badge/Laravel-E63946?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-0EA5E9?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![Supabase](https://img.shields.io/badge/Supabase-2BC48A?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336699?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org)
+[![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)](https://www.heroku.com)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 🔹 Backend: Laravel
 
-## Security Vulnerabilities
+Laravel powers the backend by managing database migrations, models, controllers, and route definitions. Migrations handle version-controlled table structures, ensuring smooth schema evolution. Models serve as data representations and encapsulate business logic linked to database tables. Controllers process user requests, interact with models, and return appropriate views. Laravel’s routing system maps URLs to controllers, creating a clean, well-structured flow throughout the application.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 🔹 Frontend: Tailwind CSS
 
-## License
+The frontend leverages Blade, Laravel’s powerful templating engine, to build dynamic and organized views with clean syntax. Blade promotes separation of concerns, making UI development more maintainable and scalable. Tailwind CSS, a utility-first CSS framework, accelerates styling by enabling responsive, consistent layouts without writing custom CSS from scratch. The combination of Blade and Tailwind CSS provides high flexibility in building sleek, user-friendly interfaces.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 🔹 Database: Supabase (PostgreSQL)
+
+Supabase is a backend-as-a-service platform offering a robust PostgreSQL database and other services such as authentication and real-time subscriptions. In this project, Supabase is used as the primary database solution due to its ease of integration, scalability, and secure architecture. PostgreSQL itself is a reliable, ACID-compliant relational database system capable of handling large datasets with high performance. Supabase simplifies database management, enabling rapid development with real-time updates, secure storage, and seamless authentication workflows.
+
+### 🔹 Deployment: Heroku
+
+Heroku is used to deploy and host the application in a cloud environment. It provides a simple, scalable, and developer-friendly platform-as-a-service (PaaS) that supports Laravel applications out of the box. With Heroku’s Git-based deployment and seamless integration with CI/CD workflows, developers can push changes quickly and maintain application uptime with minimal effort. Heroku also offers scalable dynos, add-ons, and monitoring t

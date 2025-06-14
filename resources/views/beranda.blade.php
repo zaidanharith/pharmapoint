@@ -169,6 +169,13 @@
         >
           <img src="img/supabase.svg" alt="Supabase" class="w-20" />
         </a>
+        <a
+          href="https://www.heroku.com/"
+          target="_blank"
+          class="w-40 h-40 rounded-lg shadow-md flex justify-center items-center hover:scale-105 hover:shadow:2xl hover:bg-peach transition-all duration-200"
+        >
+          <img src="img/heroku.svg" alt="Heroku" class="w-50 scale-250" />
+        </a>
       </div>
     </div>
   </section>
