@@ -53,11 +53,11 @@
                 </div>
             </div>
 
-            <div class="flex flex-col mt-10 border-t-1 border-gray-300 overflow-hidden md:pt-7">
+            <div class="flex flex-col mt-10 border-t-1 border-gray-300 overflow-hidden pt-7">
                 <h2 class="font-bold text-lg text-blue-dark flex items-center"><span class="material-symbols-outlined mr-2">receipt_long</span>Histori Transaksi</h2>
                 <div class="flex flex-col mt-5 gap-y-3">
-                    @if ($transactions->count())
-                        @foreach ($transactions as $transaction)
+                    @if ($transactions->where('user_id', auth()->id())->count())
+                        @foreach ($transactions->where('user_id', auth()->id())->sortByDesc('created_at') as $transaction)
                             <div class="flex flex-col md:flex-row justify-between items-start md:items-center rounded-lg border-1 border-gray-300 px-4 py-2 mb-1 gap-2">
                                 <div class="flex flex-col">
                                     <p class="font-bold text-lg text-green">Rp{{ number_format($transaction->grand_total, 0, ',', '.') }}</p>
@@ -74,7 +74,7 @@
 
             @if (auth()->user()->is_admin)
             @elseif (auth()->user()->is_owner)
-                <div class="flex flex-col mt-10 border-t-1 border-gray-300 overflow-hidden md:pt-7">
+                <div class="flex flex-col mt-10 border-t-1 border-gray-300 overflow-hidden pt-7">
                     <h2 class="font-bold text-lg text-blue-dark flex items-center"><span class="material-symbols-outlined mr-2">add_circle</span>Permintaan Upgrade Admin</h2>
                     <div class="flex flex-col mt-5 gap-y-3">
                         @if ($users->contains('request_admin', true))
@@ -107,7 +107,7 @@
             @endif
             
             @can('owner-admin')
-            <div class="flex flex-col mt-10 border-t-1 border-gray-300 overflow-hidden md:pt-7">
+            <div class="flex flex-col mt-10 border-t-1 border-gray-300 overflow-hidden pt-7">
                 <h2 class="font-bold text-lg text-blue-dark flex items-center"><span class="material-symbols-outlined mr-2">info</span>Informasi Katalog</h2>
                 <div class="mt-5">
                     @if ($medicines->where('stock', '<=', 10)->where('stock', '>', 0)->count() > 0)
