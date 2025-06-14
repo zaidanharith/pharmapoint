@@ -11,7 +11,7 @@ export default defineConfig({
         }),
     ],
     build: {
-        manifest: false,
+        manifest: true,
         rollupOptions: {
             input: ["resources/css/app.css", "resources/js/app.js"],
         },
