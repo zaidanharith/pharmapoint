@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Model::preventLazyLoading();
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
 
         Gate::define('admin', function (User $user) {
             return $user->is_admin;
